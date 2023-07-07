@@ -12,11 +12,10 @@ import java.math.BigDecimal;
 
 @Data @AllArgsConstructor @NoArgsConstructor
 @Entity
-public class User_Account {
+public class UserAccount {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    private Long id;
     private String email;
     private String password;
     private String lastname;

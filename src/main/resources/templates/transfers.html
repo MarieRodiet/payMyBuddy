@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Transfer</title>
+    <link rel="stylesheet" type="text/css" th:href="@{\css\main.css}"/>
+</head>
+<body>
+<header class="p-35 flex justify-content-between">
+    <span class="green-bg-white-text rounded p-10 font-24">Pay My Buddy</span>
+    <div class="font-20">
+        <ul class="flex justify-content-between list-style-type-none">
+            <li class="pr-20">
+                <a
+                        class="black-text no-decoration"
+                        href="#"
+                >Home</a
+                >
+            </li>
+            <li class="pr-20">
+                <a
+                        class="black-text no-decoration"
+                        href="#"
+                >Transfer</a
+                >
+            </li>
+            <li class="pr-20">
+                <a
+                        class="black-text no-decoration"
+                        href="#"
+                >Profile</a
+                >
+            </li>
+            <li class="pr-20">
+                <a
+                        class="black-text no-decoration"
+                        href="#"
+                >Contact</a
+                >
+            </li>
+            <li class="pr-20">
+                <a
+                        class="black-text no-decoration"
+                        href="#"
+                >Log off</a
+                >
+            </li>
+        </ul>
+    </div>
+</header>
+<section class="pt-35 pb-35 width-80">
+    <div class="flex justify-content-between">
+        <p class="font-24"><b>Send Money</b></p>
+        <button class="font-20 blue-bg-white-text pt-5 pb-5 pr-25 pl-25 no-border rounded">
+            Add Connection
+        </button>
+    </div>
+    <div class="grey-bg-black-text flex justify-content-around p-35">
+        <select
+                class="p-5 font-16 width-20"
+                id="cars"
+                name="cars"
+        >
+            <option
+                    value=""
+                    disabled
+                    selected
+            >
+                Select A Connection
+            </option>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+        </select>
+        <input
+                class="pr-10 pl-10 pt-5 pb-5 font-16 width-20"
+                placeholder="0 €"
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="1"
+                max="5"
+        />
+        <span
+                class="width-20 green-bg-white-text rounded pt-5 pb-5 pr-25 pl-25 font-24 text-center"
+        >Pay</span
+        >
+    </div>
+</section>
+<section class="pt-35 pb-35 width-80">
+    <p class="font-24"><b>My Transactions</b></p>
+    <table class="border-black no-border-spacing width-100">
+        <thead class="green-bg-white-text">
+        <tr>
+            <th class="p-20">Connections</th>
+            <th class="p-20">Description</th>
+            <th class="p-20">Amout</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="p-20">John Doe</td>
+            <td class="p-20">Restaurant</td>
+            <td class="p-20">20 €</td>
+        </tr>
+        <tr>
+            <td class="p-20">John Doe</td>
+            <td class="p-20">Restaurant</td>
+            <td class="p-20">20 €</td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>
