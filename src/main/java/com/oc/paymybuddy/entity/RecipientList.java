@@ -16,7 +16,6 @@ public class RecipientList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private long id_sender;
     private long id_recipient;
 }

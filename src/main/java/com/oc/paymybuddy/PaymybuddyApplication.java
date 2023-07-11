@@ -33,8 +33,11 @@ public class PaymybuddyApplication {
 			userAccountRepository.findAll().forEach(user -> System.out.println(user.getEmail()));
 
 			transactionRepository.save(new Transaction(null, 1, 2, new BigDecimal(10), new Date(), "Restaurant bill share"));
-			transactionRepository.save(new Transaction(null, 1, 2, new BigDecimal(25), new Date(), "Trip money"));
-			transactionRepository.save(new Transaction(null, 1, 2, new BigDecimal(8), new Date(), "Movie tickets"));
+			transactionRepository.save(new Transaction(null, 2, 3, new BigDecimal(25), new Date(), "Trip money"));
+			transactionRepository.save(new Transaction(null, 3, 1, new BigDecimal(8), new Date(), "Movie tickets"));
+			transactionRepository.save(new Transaction(null, 1, 2, new BigDecimal(50), new Date(), "Hotel bill"));
+			transactionRepository.save(new Transaction(null, 2, 3, new BigDecimal(100), new Date(), "Plane tickets"));
+			transactionRepository.save(new Transaction(null, 3, 1, new BigDecimal(28), new Date(), "Fair"));
 			transactionRepository.findAll();
 
 			recipientListRepository.save(new RecipientList(null, 1, 2));

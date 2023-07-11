@@ -21,6 +21,16 @@ GLOBAL
 	border-radius: 5px;
 }
 
+.rounded-right{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius : 5px;
+}
+
+.rounded-left{
+    border-top-left-radius : 5px;
+    border-bottom-left-radius: 5px;
+}
+
 /***************************
 TEXT
 ***************************/
@@ -32,6 +42,11 @@ TEXT
 .blue-bg-white-text {
 	background-color: #2d9cdb;
 	color: white;
+}
+
+.white-bg-blue-text {
+	background-color: white;
+	color: #2d9cdb;
 }
 
 .grey-bg-black-text {
@@ -51,6 +66,10 @@ TEXT
 
 .black-text {
 	color: black;
+}
+
+.grey-border {
+    border: 1px grey solid;
 }
 
 .bg-gray-200 {
@@ -441,4 +460,19 @@ tbody tr:nth-child(odd) {
 }
 tbody tr:nth-child(even) {
 	background-color: #eee;
+}
+
+a {
+    cursor: pointer;
+}
+
+.isDisabled {
+  color: currentColor;
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+ul > li {
+    border-collapse: collapse;
 }
