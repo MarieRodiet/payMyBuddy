@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" th:href="@{\css\main.css}"/>
+</head>
+<script src="https://use.fontawesome.com/c91c70d449.js"></script>
+<body>
+<main
+        class="width-100 h-screen flex justify-content-center align-items-center"
+>
+    <section
+            class="flex column justify-content-between grey-border width-30 rounded h-300 p-20"
+    >
+        <span
+                class="font-18 green-bg-white-text width-40 text-center rounded p-10 p-10"
+        >Pay My Buddy</span
+        >
+
+        <input
+                class="font-18 cursor rounded p-10 grey-border fontAwesome"
+                type="text"
+                placeholder="&#xf0e0;   Email"
+                value=""
+                name="email"
+        />
+
+        <input
+                class="font-18 cursor rounded p-10 grey-border fontAwesome"
+                type="text"
+                placeholder="&#xf09c;   Password"
+        />
+
+        <input
+                class="font-18 cursor blue-bg-white-text rounded p-10 no-border width-40"
+                type="button"
+                value="Login"
+        />
+        <input
+                class="font-18 cursor grey-bg-green-text  rounded p-10 no-border width-40"
+                type="button"
+                value="Register"
+        />
+    </section>
+</main>
+</body>
+</html>

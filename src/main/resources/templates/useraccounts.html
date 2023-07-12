@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="\webjars\bootstrap\5.2.3\css\bootstrap.min.css">
+</head>
+<body>
+<h3>Liste des user accounts</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>email</th>
+            <th>password</th>
+            <th>lastname</th>
+            <th>firstname</th>
+            <th>account_nb</th>
+            <th>balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="u:${userAccounts}">
+            <td th:text="${u.id}"></td>
+            <td th:text="${u.email}"></td>
+            <td th:text="${u.password}"></td>
+            <td th:text="${u.lastname}"></td>
+            <td th:text="${u.firstname}"></td>
+            <td th:text="${u.account_nb}"></td>
+            <td th:text="${u.balance}"></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Transfer</title>
+    <link rel="stylesheet" type="text/css" th:href="@{\css\main.css}"/>
+</head>
+<body>
+<header class="p-35 flex justify-content-between">
+    <span class="green-bg-white-text rounded p-10 font-24">Pay My Buddy</span>
+    <div class="font-20">
+        <ul class="flex justify-content-between list-style-type-none">
+            <li class="pr-20">
+                <a
+                        class="black-text no-decoration"
+                        href="#"
+                >Home</a
+                >
+            </li>
+            <li class="pr-20">
+                <a
+                        class="black-text no-decoration"
+                        href="#"
+                >Transfer</a
+                >
+            </li>
+            <li class="pr-20">
+                <a
+                        class="black-text no-decoration"
+                        href="#"
+                >Profile</a
+                >
+            </li>
+            <li class="pr-20">
+                <a
+                        class="black-text no-decoration"
+                        href="#"
+                >Contact</a
+                >
+            </li>
+            <li class="pr-20">
+                <a
+                        class="black-text no-decoration"
+                        href="#"
+                >Log off</a
+                >
+            </li>
+        </ul>
+    </div>
+</header>
+<section class="pt-35 pb-35 width-80">
+    <div class="flex justify-content-between pb-10">
+        <p class="font-24"><b>Send Money</b></p>
+        <button class="font-20 blue-bg-white-text pt-5 pb-5 pr-25 pl-25 no-border rounded">
+            Add Connection
+        </button>
+    </div>
+    <div class="grey-bg-black-text flex justify-content-around rounded p-35">
+        <select
+                class="p-5 font-16 width-20"
+                id="cars"
+                name="cars"
+        >
+            <option
+                    value=""
+                    disabled
+                    selected
+            >
+                Select A Connection
+            </option>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+        </select>
+        <input
+                class="pr-10 pl-10 pt-5 pb-5 font-16 width-20"
+                placeholder="0 €"
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="1"
+                max="5"
+        />
+        <span
+                class="width-20 green-bg-white-text rounded pt-5 pb-5 pr-25 pl-25 font-24 text-center"
+        >Pay</span
+        >
+    </div>
+</section>
+<section class="pt-35 pb-35 width-80">
+    <p class="font-24"><b>My Transactions</b></p>
+    <table class="border-black no-border-spacing width-100">
+        <thead class="green-bg-white-text">
+        <tr>
+            <th class="p-20">Connections</th>
+            <th class="p-20">Description</th>
+            <th class="p-20">Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="transaction : ${transactions}">
+            <td th:text="${transaction.recipient.id}" class="p-20"></td>
+            <td th:text="${transaction.description}" class="p-20"></td>
+            <td th:text="${transaction.amount} + ' €'" class="p-20"></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+<div class="pt-40">
+    <ul class="width-80 flex justify-content-center align-items-center pt-40">
+        <li class="list-style-type-none pt-10 pb-10 pr-20 pl-20 white-bg-blue-text grey-border rounded-left">
+            <a th:if="${currentPage > 0}" th:href="@{transfers(page=${currentPage - 1})}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            <a th:unless="${currentPage > 0}" class="isDisabled" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="list-style-type-none" th:each="page, status: ${pages}">
+            <a th:class="${status.index == currentPage ? 'pt-10 pb-10 pr-20 pl-20 blue-bg-white-text grey-border' : 'pt-10 pb-10 pr-20 pl-20 white-bg-blue-text grey-border' }"
+               th:text="${status.index}"
+               th:href="@{transfers(page=${status.index})}"></a>
+        </li>
+        <li class="list-style-type-none pt-10 pb-10 pr-20 pl-20 white-bg-blue-text grey-border rounded-right">
+            <a th:if="${currentPage < totalPages}" th:href="@{transfers(page=${currentPage + 1})}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+            <a th:unless="${currentPage < totalPages}" class="isDisabled" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
