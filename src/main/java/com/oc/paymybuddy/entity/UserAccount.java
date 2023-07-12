@@ -1,9 +1,6 @@
 package com.oc.paymybuddy.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Data @AllArgsConstructor @NoArgsConstructor
-@Entity
+@Entity(name="User_Account")
 public class UserAccount {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +17,7 @@ public class UserAccount {
     private String password;
     private String lastname;
     private String firstname;
-    private String account_nb;
+    @Column(name = "account_nb")
+    private String accountNumber;
     private BigDecimal balance;
 }

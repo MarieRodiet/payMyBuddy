@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-public class UserAccountController {
+public class TransfersController {
 
     private UserAccountRepository userAccountRepository;
     private TransactionRepository transactionRepository;

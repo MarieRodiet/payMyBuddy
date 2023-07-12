@@ -13,8 +13,17 @@ import java.util.Date;
 public class Transaction {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private long id_sender;
-    private long id_recipient;
+
+    @ManyToOne
+    @JoinColumn(name = "id_sender")
+    private UserAccount sender;
+
+    @ManyToOne
+    @JoinColumn(name = "id_recipient")
+    private UserAccount recipient;
+
+    //private long id_sender;
+    //private long id_recipient;
     private BigDecimal amount;
     @Temporal(TemporalType.DATE)
     private Date date;

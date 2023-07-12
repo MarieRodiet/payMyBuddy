@@ -100,7 +100,7 @@
         </thead>
         <tbody>
         <tr th:each="transaction : ${transactions}">
-            <td th:text="${transaction.id_recipient}" class="p-20"></td>
+            <td th:text="${transaction.recipient.id}" class="p-20"></td>
             <td th:text="${transaction.description}" class="p-20"></td>
             <td th:text="${transaction.amount} + ' €'" class="p-20"></td>
         </tr>

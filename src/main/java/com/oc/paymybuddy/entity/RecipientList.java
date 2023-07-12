@@ -1,9 +1,6 @@
 package com.oc.paymybuddy.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,11 +8,18 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "Recipient_List")
 public class RecipientList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private long id_sender;
-    private long id_recipient;
+    @ManyToOne
+    @JoinColumn(name = "id_sender")
+    private UserAccount sender;
+
+    @ManyToOne
+    @JoinColumn(name = "id_recipient")
+    private UserAccount recipient;
+    //private long id_sender;
+    //private long id_recipient;
 }
