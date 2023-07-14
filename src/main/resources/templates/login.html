@@ -1,48 +1,86 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" th:href="@{\css\main.css}"/>
+    <title>Registration and Login System</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
 </head>
-<script src="https://use.fontawesome.com/c91c70d449.js"></script>
 <body>
-<main
-        class="width-100 h-screen flex justify-content-center align-items-center"
->
-    <section
-            class="flex column justify-content-between grey-border width-30 rounded h-300 p-20"
-    >
-        <span
-                class="font-18 green-bg-white-text width-40 text-center rounded p-10 p-10"
-        >Pay My Buddy</span
-        >
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/index}">Registration and Login System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/register}">Register</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
 
-        <input
-                class="font-18 cursor rounded p-10 grey-border fontAwesome"
-                type="text"
-                placeholder="&#xf0e0;   Email"
-                value=""
-                name="email"
-        />
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">Invalid Email or Password</div>
+            </div>
+            <div th:if="${param.logout}">
+                <div class="alert alert-success"> You have been logged out.</div>
+            </div>
 
-        <input
-                class="font-18 cursor rounded p-10 grey-border fontAwesome"
-                type="text"
-                placeholder="&#xf09c;   Password"
-        />
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Login Form</h2>
+                </div>
+                <div class="card-body">
+                    <form
+                            method="post"
+                            role="form"
+                            th:action="@{/login}"
+                            class="form-horizontal"
+                    >
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Email</label>
+                            <input
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    class="form-control"
+                                    placeholder="Enter email address"
+                            />
+                        </div>
 
-        <input
-                class="font-18 cursor blue-bg-white-text rounded p-10 no-border width-40"
-                type="button"
-                value="Login"
-        />
-        <input
-                class="font-18 cursor grey-bg-green-text  rounded p-10 no-border width-40"
-                type="button"
-                value="Register"
-        />
-    </section>
-</main>
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Password</label>
+                            <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    class="form-control"
+                                    placeholder="Enter password"
+                            />
+                        </div>
+                        <div class="form-group mb-3">
+                            <button type="submit" class="btn btn-primary" >Submit</button>
+                            <span> Not registered ?
+                                <a th:href="@{/register}">Register/Signup here</a>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

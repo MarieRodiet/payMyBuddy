@@ -1,3 +1,4 @@
+DROP DATABASE `paymybuddy`;
 CREATE DATABASE `paymybuddy`;
 USE `paymybuddy`;
 
@@ -9,6 +10,7 @@ CREATE TABLE `User_Account` (
   `firstname` varchar(50) NOT NULL,
   `account_nb` varchar(100) NOT NULL,
   `balance` decimal(5,2) NOT NULL,
+  `role` varchar(100) NOT NULL,
    PRIMARY KEY (`ID`)
    );
 
@@ -35,11 +37,11 @@ CREATE TABLE `Transaction` (
 
 
 -- Inserting data into User_Account table
-INSERT INTO `User_Account` (`email`, `password`, `lastname`, `firstname`, `account_nb`, `balance`)
+INSERT INTO `User_Account` (`email`, `password`, `lastname`, `firstname`, `account_nb`, `balance`, `role`)
 VALUES
-  ('user_Account1@example.com', 'password1', 'Doe', 'John', '1234567890', 100.00),
-  ('user_Account2@example.com', 'password2', 'Smith', 'Jane', '0987654321', 50.00),
-  ('user_Account3@example.com', 'password3', 'Johnson', 'Michael', '5678901234', 200.00);
+  ('user_Account1@example.com', 'password1', 'Doe', 'John', '1234567890', 100.00, 'USER'),
+  ('user_Account2@example.com', 'password2', 'Smith', 'Jane', '0987654321', 50.00, 'USER'),
+  ('user_Account3@example.com', 'password3', 'Johnson', 'Michael', '5678901234', 200.00, 'USER');
 
 -- Inserting data into Recipient_List table
 INSERT INTO `Recipient_List` (`id_sender`, `id_recipient`)
@@ -53,3 +55,5 @@ INSERT INTO `Transaction` (`id_sender`, `id_recipient`, `amount`, `date`, `descr
 VALUES
   (1, 2, 20.00, NOW(), 'Payment for dinner'),
   (2, 3, 10.00, NOW(), 'Repayment for loan');
+
+  COMMIT;

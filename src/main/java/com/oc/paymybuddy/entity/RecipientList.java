@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class RecipientList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @ManyToOne
     @JoinColumn(name = "id_sender")
     private UserAccount sender;
@@ -20,6 +20,4 @@ public class RecipientList {
     @ManyToOne
     @JoinColumn(name = "id_recipient")
     private UserAccount recipient;
-    //private long id_sender;
-    //private long id_recipient;
 }

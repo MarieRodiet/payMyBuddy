@@ -1,10 +1,12 @@
-package com.oc.paymybuddy.web;
+package com.oc.paymybuddy.controller;
 
 import com.oc.paymybuddy.entity.Transaction;
 import com.oc.paymybuddy.entity.UserAccount;
 import com.oc.paymybuddy.repository.TransactionRepository;
 import com.oc.paymybuddy.repository.UserAccountRepository;
+import com.oc.paymybuddy.service.UserAccountService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -21,7 +23,18 @@ public class TransfersController {
     private UserAccountRepository userAccountRepository;
     private TransactionRepository transactionRepository;
 
-    @GetMapping(path="/index")
+    @Autowired
+    private UserAccountService userAccountService;
+
+    // handler method to handle list of users
+    @GetMapping("/users")
+    public String users(Model model){
+        List<Object> users = userAccountService.findAllUserAccounts();
+        model.addAttribute("users", users);
+        return "users";
+    }
+
+    @GetMapping(path="/useraccounts")
     public String getUserAccounts(Model model){
         List<UserAccount> userAccounts = userAccountRepository.findAll();
         model.addAttribute("userAccounts", userAccounts);
@@ -39,11 +52,5 @@ public class TransfersController {
         model.addAttribute("currentPage", page);
         return "transfers";
     }
-
-    @GetMapping(path="/home")
-    public String getHome(Model model){
-        return "home";
-    }
-
 
 }

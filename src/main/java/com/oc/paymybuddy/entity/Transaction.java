@@ -9,10 +9,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data @AllArgsConstructor @NoArgsConstructor
-@Entity
+@Entity(name = "Transaction")
 public class Transaction {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "id_sender")
@@ -22,8 +22,6 @@ public class Transaction {
     @JoinColumn(name = "id_recipient")
     private UserAccount recipient;
 
-    //private long id_sender;
-    //private long id_recipient;
     private BigDecimal amount;
     @Temporal(TemporalType.DATE)
     private Date date;

@@ -2,63 +2,112 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
-    <link rel="stylesheet" href="\webjars\bootstrap\5.2.3\css\bootstrap.min.css">
+    <title>Registration and Login System</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
 </head>
-<script src="https://use.fontawesome.com/c91c70d449.js"></script>
 <body>
-    <main
-            class="width-100 h-screen flex justify-content-center align-items-center"
-    >
-        <section
-                class="flex column justify-content-between grey-border width-30 rounded h-500 p-20"
-        >
-            <span
-                    class="font-18 green-bg-white-text width-40 text-center rounded p-10 p-10"
-            >Pay My Buddy</span
-            >
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/index}">Registration and Login System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/login}">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br /><br /><br />
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Registration</h2>
+            </div>
+            <div th:if="${param.success}">
+                <div class="alert alert-info">
+                    You have successfully registered our app!
+                </div>
+            </div>
+            <div class="card-body">
+                <form
+                        method="post"
+                        role="form"
+                        th:action="@{/register/save}"
+                        th:object="${user}"
+                >
+                    <div class="form-group mb-3">
+                        <label class="form-label">First Name</label>
+                        <input
+                                class="form-control"
+                                id="firstname"
+                                name="firstname"
+                                placeholder="Enter first name"
+                                th:field="*{firstname}"
+                                type="text"
+                        />
+                        <p th:errors = "*{firstname}" class="text-danger"
+                           th:if="${#fields.hasErrors('firstname')}"></p>
+                    </div>
 
-            <input
-                    class="font-18 cursor rounded p-10 grey-border"
-                    type="text"
-                    placeholder="Email"
-                    value=""
-                    name="email"
-            />
+                    <div class="form-group mb-3">
+                        <label class="form-label">Last Name</label>
+                        <input
+                                class="form-control"
+                                id="lastname"
+                                name="lastname"
+                                placeholder="Enter last name"
+                                th:field="*{lastname}"
+                                type="text"
+                        />
+                        <p th:errors = "*{lastname}" class="text-danger"
+                           th:if="${#fields.hasErrors('lastname')}"></p>
+                    </div>
 
-            <input
-                    class="font-18 cursor rounded p-10 grey-border"
-                    type="text"
-                    placeholder="Password"
-            />
+                    <div class="form-group mb-3">
+                        <label class="form-label">Email</label>
+                        <input
+                                class="form-control"
+                                id="email"
+                                name="email"
+                                placeholder="Enter email address"
+                                th:field="*{email}"
+                                type="email"
+                        />
+                        <p th:errors = "*{email}" class="text-danger"
+                           th:if="${#fields.hasErrors('email')}"></p>
+                    </div>
 
-            <input
-                    class="font-18 cursor rounded p-10 grey-border fontAwesome"
-                    type="text"
-                    placeholder="Firstname"
-                    value=""
-                    name="email"
-            />
-
-            <input
-                    class="font-18 cursor rounded p-10 grey-border fontAwesome"
-                    type="text"
-                    placeholder="Lastname"
-            />
-
-            <input
-                    class="font-18 cursor rounded p-10 grey-border fontAwesome"
-                    type="text"
-                    placeholder="Bank Account"
-            />
-
-            <input
-                    class="font-18 cursor blue-bg-white-text rounded p-10 no-border width-40"
-                    type="button"
-                    value="Register"
-            />
-        </section>
-    </main>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Password</label>
+                        <input
+                                class="form-control"
+                                id="password"
+                                name="password"
+                                placeholder="Enter password"
+                                th:field="*{password}"
+                                type="password"
+                        />
+                        <p th:errors = "*{password}" class="text-danger"
+                           th:if="${#fields.hasErrors('password')}"></p>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Register</button>
+                        <span>Already registered? <a th:href="@{/login}">Login here</a></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
-
+</body>
+</html>
