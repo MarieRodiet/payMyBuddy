@@ -10,5 +10,5 @@ public interface UserAccountService {
 
     UserAccount findUserAccountByEmail(String email);
 
-    List<Object> findAllUserAccounts();
+    List<UserAccountDto> findAllUserAccounts();
 }

@@ -1,9 +1,8 @@
 package com.oc.paymybuddy.controller;
 
+import com.oc.paymybuddy.dto.UserAccountDto;
 import com.oc.paymybuddy.entity.Transaction;
-import com.oc.paymybuddy.entity.UserAccount;
 import com.oc.paymybuddy.repository.TransactionRepository;
-import com.oc.paymybuddy.repository.UserAccountRepository;
 import com.oc.paymybuddy.service.UserAccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import java.util.List;
 @AllArgsConstructor
 public class TransfersController {
 
-    private UserAccountRepository userAccountRepository;
     private TransactionRepository transactionRepository;
 
     @Autowired
@@ -29,14 +27,14 @@ public class TransfersController {
     // handler method to handle list of users
     @GetMapping("/users")
     public String users(Model model){
-        List<Object> users = userAccountService.findAllUserAccounts();
+        List<UserAccountDto> users = userAccountService.findAllUserAccounts();
         model.addAttribute("users", users);
         return "users";
     }
 
     @GetMapping(path="/useraccounts")
     public String getUserAccounts(Model model){
-        List<UserAccount> userAccounts = userAccountRepository.findAll();
+        List<UserAccountDto> userAccounts = userAccountService.findAllUserAccounts();
         model.addAttribute("userAccounts", userAccounts);
         return "useraccounts";
     }

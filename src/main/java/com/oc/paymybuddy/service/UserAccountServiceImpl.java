@@ -37,14 +37,14 @@ public class UserAccountServiceImpl implements UserAccountService{
     }
 
     @Override
-    public List<Object> findAllUserAccounts() {
+    public List<UserAccountDto> findAllUserAccounts() {
         List<UserAccount> users = userAccountRepository.findAll();
         return users.stream()
                 .map((user) -> mapToUserDto(user))
                 .collect(Collectors.toList());
     }
 
-    private Object mapToUserDto(UserAccount user) {
+    private UserAccountDto mapToUserDto(UserAccount user) {
         UserAccountDto userDto = new UserAccountDto();
         userDto.setFirstname(user.getFirstname());
         userDto.setLastname(user.getLastname());

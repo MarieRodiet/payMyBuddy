@@ -49,20 +49,15 @@ public class AuthenticationController {
         }
 
         userAccountService.saveUserAccount(userDto);
-        return "redirect:/register?success";
+        List<UserAccountDto> userAccounts = userAccountService.findAllUserAccounts();
+        model.addAttribute("userAccounts", userAccounts);
+        return "users";
     }
 
 
     // handler method to handle login request
     @GetMapping("/login")
     public String login(){
-        return "login";
-    }
-
-    // handler method to handle login request
-    @PostMapping("/login")
-    public String loginAttempt(){
-        //si ok, renvoie "users", sinon, "login"
         return "login";
     }
 }
