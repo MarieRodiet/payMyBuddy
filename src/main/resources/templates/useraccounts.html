@@ -29,8 +29,10 @@
             <td th:text="${u.password}"></td>
             <td th:text="${u.lastname}"></td>
             <td th:text="${u.firstname}"></td>
-            <td th:text="${u.account_nb}"></td>
-            <td th:text="${u.balance}"></td>
+            <td th:if="${u.accountNumber} != null"><span th:text="${u.accountNumber}"></span></td>
+            <td th:unless="${u.accountNumber} != null">0</td>
+            <td th:if="${u.balance} != null"><span th:text="${u.balance}"></span></td>
+            <td th:unless="${u.balance} != null">0</td>
         </tr>
     </tbody>
 </table>

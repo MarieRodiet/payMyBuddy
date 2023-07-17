@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Recipient_List")
+@Table(name = "recipient_lists")
 public class RecipientList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

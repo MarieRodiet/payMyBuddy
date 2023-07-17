@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,4 +22,6 @@ public class UserAccountDto {
     private String password;
     private String lastname;
     private String firstname;
+    private String accountNumber;
+    private BigDecimal balance;
 }

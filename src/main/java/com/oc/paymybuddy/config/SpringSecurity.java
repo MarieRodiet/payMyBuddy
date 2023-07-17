@@ -1,7 +1,7 @@
 package com.oc.paymybuddy.config;
 
-import com.oc.paymybuddy.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -30,15 +30,17 @@ public class SpringSecurity {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
-                                .requestMatchers("/index").permitAll()
-                                .requestMatchers("/users").hasRole(String.valueOf(Role.USER))
-                                .requestMatchers("/useraccounts").hasRole(String.valueOf(Role.USER))
-                                .requestMatchers("/transfers").hasRole(String.valueOf(Role.USER))
+                                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                                .requestMatchers("/login").permitAll()
+                                .requestMatchers("/h2-console").permitAll()
+                                .requestMatchers("/users").authenticated()
+                                .requestMatchers("/useraccounts").authenticated()
+                                .requestMatchers("/transfers").authenticated()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/users")
+                                .defaultSuccessUrl("/transfers")
                                 .permitAll()
                 ).logout(
                         logout -> logout
