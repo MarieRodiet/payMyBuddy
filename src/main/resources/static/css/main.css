@@ -200,6 +200,11 @@ WIDTH
   margin: 0 auto;
 }
 
+.width-400 {
+  width: 400px;
+  margin: 0 auto;
+}
+
 .h-screen {
   height: 100vh;
 }
@@ -208,6 +213,13 @@ WIDTH
   height: 500px;
 }
 
+.h-450 {
+  height: 450px;
+}
+
+.h-400 {
+  height: 400px;
+}
 .h-300 {
   height: 300px;
 }
@@ -510,6 +522,10 @@ ul > li {
   border-collapse: collapse;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .cursor {
   cursor: pointer;
 }
@@ -520,4 +536,21 @@ ul > li {
 
 input:hover {
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.23);
+}
+
+.vertical {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.blue-hover:hover {
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.23);
+  background: linear-gradient(to bottom right, #5b61dd, #2d9cdb);
+}
+
+.green-hover:hover {
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.23);
+  background: linear-gradient(to bottom right, #479070, #76bf51);
 }

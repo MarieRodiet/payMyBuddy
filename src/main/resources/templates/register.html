@@ -1,64 +1,126 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
-    <link rel="stylesheet" href="\webjars\bootstrap\5.2.3\css\bootstrap.min.css">
+    <title>Pay my buddy - Register</title>
+    <link rel="stylesheet" type="text/css" th:href="@{\css\main.css}"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
 </head>
-<script src="https://use.fontawesome.com/c91c70d449.js"></script>
-<body>
-    <main
-            class="width-100 h-screen flex justify-content-center align-items-center"
-    >
-        <section
-                class="flex column justify-content-between grey-border width-30 rounded h-500 p-20"
-        >
-            <span
-                    class="font-18 green-bg-white-text width-40 text-center rounded p-10 p-10"
-            >Pay My Buddy</span
-            >
+<body  class="w-75 mx-auto">
+        <div class="card container-fluid  vertical grey-border rounded h-450 p-20 width-50 mx-auto p-5 mt-5">
+            <div th:if="${param.success}">
+                <div class="alert alert-info">
+                    You have successfully registered our app!
+                </div>
+            </div>
+            <div class="card-body flex column justify-content-md-center pt-35">
+                        <span class="font-18 green-bg-white-text text-center width-40 rounded p-10">
+                            Pay My Buddy</span>
+                <form
+                        method="post"
+                        role="form"
+                        th:action="@{/register}"
+                        th:object="${user}"
+                        class="form width-80 pt-35"
+                >
+                    <div class="form-group mb-3">
+                        <input
+                                class="form-control"
+                                id="firstname"
+                                name="firstname"
+                                placeholder="Enter your first name"
+                                th:field="*{firstname}"
+                                type="text"
+                        />
+                        <p th:errors = "*{firstname}" class="text-danger"
+                           th:if="${#fields.hasErrors('firstname')}"></p>
+                    </div>
 
-            <input
-                    class="font-18 cursor rounded p-10 grey-border"
-                    type="text"
-                    placeholder="Email"
-                    value=""
-                    name="email"
-            />
+                    <div class="form-group mb-3">
+                        <input
+                                class="form-control"
+                                id="lastname"
+                                name="lastname"
+                                placeholder="Enter your last name"
+                                th:field="*{lastname}"
+                                type="text"
+                        />
+                        <p th:errors = "*{lastname}" class="text-danger"
+                           th:if="${#fields.hasErrors('lastname')}"></p>
+                    </div>
 
-            <input
-                    class="font-18 cursor rounded p-10 grey-border"
-                    type="text"
-                    placeholder="Password"
-            />
+                    <div class="form-group mb-3">
+                        <input
+                                class="form-control"
+                                id="accountNumber"
+                                name="accountNumber"
+                                placeholder="Enter your account number"
+                                th:field="*{accountNumber}"
+                                type="text"
+                        />
+                        <p th:errors = "*{accountNumber}" class="text-danger"
+                           th:if="${#fields.hasErrors('accountNumber')}"></p>
+                    </div>
 
-            <input
-                    class="font-18 cursor rounded p-10 grey-border fontAwesome"
-                    type="text"
-                    placeholder="Firstname"
-                    value=""
-                    name="email"
-            />
+                    <div class="form-group mb-3">
+                        <input
+                                class="form-control"
+                                id="balance"
+                                name="balance"
+                                placeholder="Enter your account number's balance"
+                                th:field="*{balance}"
+                                type="text"
+                        />
+                        <p th:errors = "*{balance}" class="text-danger"
+                           th:if="${#fields.hasErrors('balance')}"></p>
+                    </div>
 
-            <input
-                    class="font-18 cursor rounded p-10 grey-border fontAwesome"
-                    type="text"
-                    placeholder="Lastname"
-            />
+                    <div class="form-group mb-3">
+                        <input
+                                class="form-control"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your email address"
+                                th:field="*{email}"
+                                type="email"
+                        />
+                        <p th:errors = "*{email}" class="text-danger"
+                           th:if="${#fields.hasErrors('email')}"></p>
+                    </div>
 
-            <input
-                    class="font-18 cursor rounded p-10 grey-border fontAwesome"
-                    type="text"
-                    placeholder="Bank Account"
-            />
+                    <div class="form-group mb-3">
+                        <input
+                                class="form-control"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                th:field="*{password}"
+                                type="password"
+                        />
+                        <p th:errors = "*{password}" class="text-danger"
+                           th:if="${#fields.hasErrors('password')}"></p>
+                    </div>
+                    <div class="form-group mb-3 pt-5 width-30 d-flex justify-content-around text-center"
+                    >
+                        <button type="submit" class="btn green-bg-white-text">
+                            Register
+                        </button>
+                    </div>
 
-            <input
-                    class="font-18 cursor blue-bg-white-text rounded p-10 no-border width-40"
-                    type="button"
-                    value="Register"
-            />
-        </section>
-    </main>
+                    <div class="form-group mb-3 pt-5 width-30 d-flex justify-content-around text-center">
+                        <a th:href="@{/login}">Login here</a>
+                    </div>
+                </form>
+            </div>
+
+    </div>
+
 </body>
 </html>
-
+</body>
+</html>
