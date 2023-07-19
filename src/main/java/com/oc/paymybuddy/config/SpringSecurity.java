@@ -1,5 +1,6 @@
 package com.oc.paymybuddy.config;
 
+import com.oc.paymybuddy.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -29,13 +30,15 @@ public class SpringSecurity {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/register/**").permitAll()
+                        authorize
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                                .requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/login").permitAll()
-                                .requestMatchers("/h2-console").permitAll()
-                                .requestMatchers("/users").authenticated()
-                                .requestMatchers("/useraccounts").authenticated()
-                                .requestMatchers("/transfers").authenticated()
+                                .requestMatchers("/users").hasAuthority(Role.USER.name())
+                                .requestMatchers("/transfers").hasAuthority(Role.USER.name())
+                                .requestMatchers("/useraccounts").hasAuthority(Role.USER.name())
+                                .anyRequest().authenticated()
+
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")

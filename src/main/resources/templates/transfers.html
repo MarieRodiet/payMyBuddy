@@ -2,108 +2,110 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Transfer</title>
+    <title>Pay my buddy - Transfers</title>
     <link rel="stylesheet" type="text/css" th:href="@{\css\main.css}"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
 </head>
-<body>
-<header class="p-35 flex justify-content-between">
-    <span class="green-bg-white-text rounded p-10 font-24">Pay My Buddy</span>
-    <div class="font-20">
-        <ul class="flex justify-content-between list-style-type-none">
-            <li class="pr-20">
-                <a
-                        class="black-text no-decoration"
-                        href="#"
-                >Home</a
-                >
-            </li>
-            <li class="pr-20">
-                <a
-                        class="black-text no-decoration"
-                        href="#"
-                >Transfer</a
-                >
-            </li>
-            <li class="pr-20">
-                <a
-                        class="black-text no-decoration"
-                        href="#"
-                >Profile</a
-                >
-            </li>
-            <li class="pr-20">
-                <a
-                        class="black-text no-decoration"
-                        href="#"
-                >Contact</a
-                >
-            </li>
-            <li class="pr-20">
-                <a
-                        class="black-text no-decoration"
-                        href="#"
-                >Log off</a
-                >
-            </li>
-        </ul>
+<body class="container">
+<div class="text-dark font-18 pt-40 pb-40 flex justify-content-between">
+    <h3 class="green-bg-white-text rounded p-10 font-20">Pay My Buddy</h3>
+
+    <nav class="navbar navbar-light">
+        <div class="container-fluid pt-30 flex justify-content-around">
+            <div
+                    class="collapse navbar-collapse d-flex justify-content-end"
+                    id="navbarNav"
+            >
+                <ul class="navbar-nav">
+                    <li class="nav-item mx-3 pr-10">
+                        <a
+                                class="nav-link black-text"
+                                aria-current="page"
+                                th:href="@{/home}"
+                        >Home</a
+                        >
+                    </li>
+                    <li class="nav-item mx-3 pr-10">
+                        <a class="nav-link active" th:href="@{/transfers}">Transfer</a>
+                    </li>
+                    <li class="nav-item mx-3 pr-10">
+                        <a class="nav-link black-text" th:href="@{/profile}">Profile</a>
+                    </li>
+                    <li class="nav-item mx-3 pr-10">
+                        <a class="nav-link black-text" th:href="@{/contact}">Contact</a>
+                    </li>
+                    <li class="nav-item mx-3 pr-10">
+                        <a class="nav-link black-text" th:href="@{/logout}">Log Off</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+    <div class="row">
+        <div class="col bg-light">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Transfer</li>
+                </ol>
+            </nav>
+        </div>
     </div>
-</header>
 <section class="pt-35 pb-35 width-80">
     <div class="flex justify-content-between pb-10">
         <p class="font-24"><b>Send Money</b></p>
-        <button class="font-20 blue-bg-white-text pt-5 pb-5 pr-25 pl-25 no-border rounded">
+        <button class="blue-hover font-20 blue-bg-white-text btn font-20">
             Add Connection
         </button>
     </div>
     <div class="grey-bg-black-text flex justify-content-around rounded p-35">
         <select
-                class="p-5 font-16 width-20"
-                id="cars"
-                name="cars"
+                class="form-select mb-3 width-30"
+                aria-label="Select A Connection"
+                id="connections"
+                name="connections"
         >
-            <option
-                    value=""
-                    disabled
-                    selected
-            >
-                Select A Connection
+            <option value="" disabled selected> Select A Connection
             </option>
             <option value="volvo">Volvo</option>
             <option value="saab">Saab</option>
             <option value="fiat">Fiat</option>
             <option value="audi">Audi</option>
         </select>
-        <input
-                class="pr-10 pl-10 pt-5 pb-5 font-16 width-20"
-                placeholder="0 €"
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="1"
-                max="5"
-        />
-        <span
-                class="width-20 green-bg-white-text rounded pt-5 pb-5 pr-25 pl-25 font-24 text-center"
-        >Pay</span
-        >
+        <div class="width-30">
+            <input
+                    class="form-control font-16 p-40"
+                    placeholder="0 €"
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    min="1"
+                    max="5"
+            />
+        </div>
+        <span class="green-hover width-20 green-bg-white-text btn">Pay</span>
     </div>
 </section>
 <section class="pt-35 pb-35 width-80">
     <p class="font-24"><b>My Transactions</b></p>
-    <table class="border-black no-border-spacing width-100">
+    <table class="grey-border no-border-spacing table table-striped table-hover">
         <thead class="green-bg-white-text">
         <tr>
-            <th class="p-20">Connections</th>
-            <th class="p-20">Description</th>
-            <th class="p-20">Amount</th>
+            <th>Connections</th>
+            <th>Description</th>
+            <th>Amount</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="transaction : ${transactions}">
-            <td th:text="${transaction.recipient.id}" class="p-20"></td>
-            <td th:text="${transaction.description}" class="p-20"></td>
-            <td th:text="${transaction.amount} + ' €'" class="p-20"></td>
-        </tr>
+            <tr th:each="transaction : ${transactions}">
+                <td th:text="${transaction.recipient.id}"></td>
+                <td th:text="${transaction.description}"></td>
+                <td th:text="${transaction.amount} + ' €'"></td>
+            </tr>
         </tbody>
     </table>
 </section>

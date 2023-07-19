@@ -522,6 +522,10 @@ ul > li {
   border-collapse: collapse;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .cursor {
   cursor: pointer;
 }
@@ -539,4 +543,14 @@ input:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.blue-hover:hover {
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.23);
+  background: linear-gradient(to bottom right, #5b61dd, #2d9cdb);
+}
+
+.green-hover:hover {
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.23);
+  background: linear-gradient(to bottom right, #479070, #76bf51);
 }
