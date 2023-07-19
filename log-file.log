@@ -1,0 +1,185 @@
+2023-07-19T10:34:27.550+02:00 DEBUG 72909 --- [restartedMain] o.s.w.f.CommonsRequestLoggingFilter      : Filter 'logFilter' configured for use
+2023-07-19T10:34:29.629+02:00 DEBUG 72909 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 8 mappings in 'requestMappingHandlerMapping'
+2023-07-19T10:34:29.704+02:00 DEBUG 72909 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-07-19T10:34:29.798+02:00 DEBUG 72909 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-07-19T10:34:29.831+02:00 DEBUG 72909 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-07-19T10:34:48.253+02:00  INFO 72909 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-19T10:34:48.254+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2023-07-19T10:34:48.254+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2023-07-19T10:34:48.254+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2023-07-19T10:34:48.255+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@5aca36a1
+2023-07-19T10:34:48.255+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@529acd9d
+2023-07-19T10:34:48.255+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2023-07-19T10:34:48.256+02:00  INFO 72909 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-07-19T10:34:48.277+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.AuthenticationController#showRegistrationForm(Model)
+2023-07-19T10:34:48.280+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /register]
+2023-07-19T10:34:48.281+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/register", parameters={}
+2023-07-19T10:34:48.283+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.AuthenticationController#showRegistrationForm(Model)
+2023-07-19T10:34:48.308+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2023-07-19T10:34:48.572+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-07-19T10:34:48.573+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /register]
+2023-07-19T10:34:48.610+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:34:48.619+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /css/main.css]
+2023-07-19T10:34:48.621+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/css/main.css", parameters={}
+2023-07-19T10:34:48.624+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:34:48.651+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-07-19T10:34:48.652+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /css/main.css]
+2023-07-19T10:34:48.685+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:34:48.686+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /favicon.ico]
+2023-07-19T10:34:48.687+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/favicon.ico", parameters={}
+2023-07-19T10:34:48.688+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:34:48.690+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2023-07-19T10:34:48.690+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2023-07-19T10:34:48.691+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /favicon.ico]
+2023-07-19T10:34:48.696+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:34:48.696+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:34:48.697+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:34:48.698+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:34:48.699+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:34:48.700+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:35:59.681+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.AuthenticationController#registration(UserAccountDto, BindingResult, RedirectAttributes, Model)
+2023-07-19T10:35:59.682+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] o.s.w.f.CommonsRequestLoggingFilter      : Before request [POST /register]
+2023-07-19T10:35:59.683+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] o.s.web.servlet.DispatcherServlet        : POST "/register", parameters={masked}
+2023-07-19T10:35:59.683+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.AuthenticationController#registration(UserAccountDto, BindingResult, RedirectAttributes, Model)
+2023-07-19T10:35:59.981+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] o.s.web.servlet.view.RedirectView        : View name 'redirect:', model {}
+2023-07-19T10:35:59.982+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 302 FOUND
+2023-07-19T10:35:59.983+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: POST /register, payload=firstname=Marie&lastname=Moore&accountNumber=qdsfqsdf&email=qdsfqsdfgqdsgq%40gmail.com&password=password]
+2023-07-19T10:35:59.988+02:00 DEBUG 72909 --- [http-nio-8082-exec-7] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /login]
+2023-07-19T10:35:59.988+02:00 DEBUG 72909 --- [http-nio-8082-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/login", parameters={}
+2023-07-19T10:35:59.988+02:00 DEBUG 72909 --- [http-nio-8082-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.AuthenticationController#login()
+2023-07-19T10:35:59.989+02:00 DEBUG 72909 --- [http-nio-8082-exec-7] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2023-07-19T10:35:59.994+02:00 DEBUG 72909 --- [http-nio-8082-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-07-19T10:35:59.994+02:00 DEBUG 72909 --- [http-nio-8082-exec-7] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /login]
+2023-07-19T10:36:00.035+02:00 DEBUG 72909 --- [http-nio-8082-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:00.036+02:00 DEBUG 72909 --- [http-nio-8082-exec-8] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /css/main.css]
+2023-07-19T10:36:00.036+02:00 DEBUG 72909 --- [http-nio-8082-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/css/main.css", parameters={}
+2023-07-19T10:36:00.067+02:00 DEBUG 72909 --- [http-nio-8082-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:00.072+02:00 DEBUG 72909 --- [http-nio-8082-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-07-19T10:36:00.077+02:00 DEBUG 72909 --- [http-nio-8082-exec-8] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /css/main.css]
+2023-07-19T10:36:00.172+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:00.179+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /favicon.ico]
+2023-07-19T10:36:00.180+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/favicon.ico", parameters={}
+2023-07-19T10:36:00.182+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:00.187+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2023-07-19T10:36:00.190+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2023-07-19T10:36:00.190+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /favicon.ico]
+2023-07-19T10:36:00.193+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:00.195+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:00.201+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:00.202+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:00.203+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:00.203+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:15.529+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /login?error]
+2023-07-19T10:36:15.529+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/login?error", parameters={masked}
+2023-07-19T10:36:15.530+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.AuthenticationController#login()
+2023-07-19T10:36:15.531+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2023-07-19T10:36:15.535+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-07-19T10:36:15.535+02:00 DEBUG 72909 --- [http-nio-8082-exec-1] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /login?error]
+2023-07-19T10:36:15.564+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:15.564+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /css/main.css]
+2023-07-19T10:36:15.565+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/css/main.css", parameters={}
+2023-07-19T10:36:15.566+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:15.570+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-07-19T10:36:15.571+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /css/main.css]
+2023-07-19T10:36:15.661+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:15.662+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /favicon.ico]
+2023-07-19T10:36:15.663+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/favicon.ico", parameters={}
+2023-07-19T10:36:15.665+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:15.668+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2023-07-19T10:36:15.668+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2023-07-19T10:36:15.668+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /favicon.ico]
+2023-07-19T10:36:15.669+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:15.671+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:15.672+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:15.672+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:15.673+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:15.673+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:18.486+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.AuthenticationController#showRegistrationForm(Model)
+2023-07-19T10:36:18.486+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /register]
+2023-07-19T10:36:18.486+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/register", parameters={}
+2023-07-19T10:36:18.487+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.AuthenticationController#showRegistrationForm(Model)
+2023-07-19T10:36:18.489+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2023-07-19T10:36:18.500+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-07-19T10:36:18.500+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /register]
+2023-07-19T10:36:18.536+02:00 DEBUG 72909 --- [http-nio-8082-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:18.536+02:00 DEBUG 72909 --- [http-nio-8082-exec-5] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /css/main.css]
+2023-07-19T10:36:18.536+02:00 DEBUG 72909 --- [http-nio-8082-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/css/main.css", parameters={}
+2023-07-19T10:36:18.537+02:00 DEBUG 72909 --- [http-nio-8082-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:18.540+02:00 DEBUG 72909 --- [http-nio-8082-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-07-19T10:36:18.540+02:00 DEBUG 72909 --- [http-nio-8082-exec-5] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /css/main.css]
+2023-07-19T10:36:18.604+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:18.605+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /favicon.ico]
+2023-07-19T10:36:18.605+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/favicon.ico", parameters={}
+2023-07-19T10:36:18.606+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:18.606+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2023-07-19T10:36:18.607+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2023-07-19T10:36:18.607+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /favicon.ico]
+2023-07-19T10:36:18.611+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:18.613+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:18.613+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:18.614+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:18.615+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:18.615+02:00 DEBUG 72909 --- [http-nio-8082-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:35.732+02:00 DEBUG 72909 --- [http-nio-8082-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.AuthenticationController#registration(UserAccountDto, BindingResult, RedirectAttributes, Model)
+2023-07-19T10:36:35.733+02:00 DEBUG 72909 --- [http-nio-8082-exec-7] o.s.w.f.CommonsRequestLoggingFilter      : Before request [POST /register]
+2023-07-19T10:36:35.733+02:00 DEBUG 72909 --- [http-nio-8082-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/register", parameters={masked}
+2023-07-19T10:36:35.733+02:00 DEBUG 72909 --- [http-nio-8082-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.AuthenticationController#registration(UserAccountDto, BindingResult, RedirectAttributes, Model)
+2023-07-19T10:36:35.822+02:00 DEBUG 72909 --- [http-nio-8082-exec-7] o.s.web.servlet.view.RedirectView        : View name 'redirect:', model {}
+2023-07-19T10:36:35.823+02:00 DEBUG 72909 --- [http-nio-8082-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 302 FOUND
+2023-07-19T10:36:35.823+02:00 DEBUG 72909 --- [http-nio-8082-exec-7] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: POST /register, payload=firstname=qdsfqsdf&lastname=dsfgqsdfg&accountNumber=dxfghdfgjh&email=marie.rodiet%40gmail.com&password=password]
+2023-07-19T10:36:35.831+02:00 DEBUG 72909 --- [http-nio-8082-exec-8] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /login]
+2023-07-19T10:36:35.831+02:00 DEBUG 72909 --- [http-nio-8082-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/login", parameters={}
+2023-07-19T10:36:35.831+02:00 DEBUG 72909 --- [http-nio-8082-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.AuthenticationController#login()
+2023-07-19T10:36:35.832+02:00 DEBUG 72909 --- [http-nio-8082-exec-8] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2023-07-19T10:36:35.837+02:00 DEBUG 72909 --- [http-nio-8082-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-07-19T10:36:35.838+02:00 DEBUG 72909 --- [http-nio-8082-exec-8] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /login]
+2023-07-19T10:36:35.875+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:35.876+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /css/main.css]
+2023-07-19T10:36:35.876+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/css/main.css", parameters={}
+2023-07-19T10:36:35.877+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:35.883+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-07-19T10:36:35.883+02:00 DEBUG 72909 --- [http-nio-8082-exec-9] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /css/main.css]
+2023-07-19T10:36:35.976+02:00 DEBUG 72909 --- [http-nio-8082-exec-10] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:35.976+02:00 DEBUG 72909 --- [http-nio-8082-exec-10] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /favicon.ico]
+2023-07-19T10:36:35.976+02:00 DEBUG 72909 --- [http-nio-8082-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/favicon.ico", parameters={}
+2023-07-19T10:36:35.978+02:00 DEBUG 72909 --- [http-nio-8082-exec-10] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:35.981+02:00 DEBUG 72909 --- [http-nio-8082-exec-10] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2023-07-19T10:36:35.982+02:00 DEBUG 72909 --- [http-nio-8082-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2023-07-19T10:36:35.982+02:00 DEBUG 72909 --- [http-nio-8082-exec-10] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /favicon.ico]
+2023-07-19T10:36:35.983+02:00 DEBUG 72909 --- [http-nio-8082-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:35.984+02:00 DEBUG 72909 --- [http-nio-8082-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:35.985+02:00 DEBUG 72909 --- [http-nio-8082-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:35.985+02:00 DEBUG 72909 --- [http-nio-8082-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:35.986+02:00 DEBUG 72909 --- [http-nio-8082-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:35.987+02:00 DEBUG 72909 --- [http-nio-8082-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:43.594+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.TransfersController#getTransfers(Model, Integer, Integer)
+2023-07-19T10:36:43.594+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.TransfersController#getTransfers(Model, Integer, Integer)
+2023-07-19T10:36:43.594+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.TransfersController#getTransfers(Model, Integer, Integer)
+2023-07-19T10:36:43.594+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.TransfersController#getTransfers(Model, Integer, Integer)
+2023-07-19T10:36:43.595+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.TransfersController#getTransfers(Model, Integer, Integer)
+2023-07-19T10:36:43.595+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.TransfersController#getTransfers(Model, Integer, Integer)
+2023-07-19T10:36:43.595+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /transfers]
+2023-07-19T10:36:43.595+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/transfers", parameters={}
+2023-07-19T10:36:43.595+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.oc.paymybuddy.controller.TransfersController#getTransfers(Model, Integer, Integer)
+2023-07-19T10:36:43.611+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2023-07-19T10:36:43.622+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-07-19T10:36:43.622+02:00 DEBUG 72909 --- [http-nio-8082-exec-2] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /transfers]
+2023-07-19T10:36:43.654+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:43.654+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /css/main.css]
+2023-07-19T10:36:43.655+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/css/main.css", parameters={}
+2023-07-19T10:36:43.655+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:43.657+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-07-19T10:36:43.658+02:00 DEBUG 72909 --- [http-nio-8082-exec-3] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /css/main.css]
+2023-07-19T10:36:43.711+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:43.711+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] o.s.w.f.CommonsRequestLoggingFilter      : Before request [GET /favicon.ico]
+2023-07-19T10:36:43.712+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/favicon.ico", parameters={}
+2023-07-19T10:36:43.712+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-07-19T10:36:43.714+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2023-07-19T10:36:43.714+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2023-07-19T10:36:43.714+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] o.s.w.f.CommonsRequestLoggingFilter      : REQUEST DATA: GET /favicon.ico]
+2023-07-19T10:36:43.716+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:43.717+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:43.717+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:43.718+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:43.718+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-07-19T10:36:43.719+02:00 DEBUG 72909 --- [http-nio-8082-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
