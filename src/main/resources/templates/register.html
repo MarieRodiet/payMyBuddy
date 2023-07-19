@@ -1,55 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <meta charset="UTF-8">
-    <title>Registration and Login System</title>
+    <title>Pay my buddy - Register</title>
+    <link rel="stylesheet" type="text/css" th:href="@{\css\main.css}"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet"
+    />
 </head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/index}">Registration and Login System</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/login}">Login</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<br /><br /><br />
-<div class="container">
-    <div class="row col-md-8 offset-md-2">
-        <div class="card">
-            <div class="card-header">
-                <h2 class="text-center">Registration</h2>
-            </div>
+<body  class="w-75 mx-auto">
+        <div class="card container-fluid  vertical grey-border rounded h-450 p-20 width-50 mx-auto p-5 mt-5">
             <div th:if="${param.success}">
                 <div class="alert alert-info">
                     You have successfully registered our app!
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body flex column justify-content-md-center pt-35">
+                        <span class="font-18 green-bg-white-text text-center width-40 rounded p-10">
+                            Pay My Buddy</span>
                 <form
                         method="post"
                         role="form"
-                        th:action="@{/register/save}"
+                        th:action="@{/register}"
                         th:object="${user}"
+                        class="form width-80 pt-35"
                 >
                     <div class="form-group mb-3">
-                        <label class="form-label">First Name</label>
                         <input
                                 class="form-control"
                                 id="firstname"
                                 name="firstname"
-                                placeholder="Enter first name"
+                                placeholder="Enter your first name"
                                 th:field="*{firstname}"
                                 type="text"
                         />
@@ -58,12 +46,11 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label class="form-label">Last Name</label>
                         <input
                                 class="form-control"
                                 id="lastname"
                                 name="lastname"
-                                placeholder="Enter last name"
+                                placeholder="Enter your last name"
                                 th:field="*{lastname}"
                                 type="text"
                         />
@@ -72,12 +59,24 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label class="form-label">Email</label>
+                        <input
+                                class="form-control"
+                                id="accountNumber"
+                                name="accountNumber"
+                                placeholder="Enter your account number"
+                                th:field="*{accountNumber}"
+                                type="text"
+                        />
+                        <p th:errors = "*{accountNumber}" class="text-danger"
+                           th:if="${#fields.hasErrors('accountNumber')}"></p>
+                    </div>
+
+                    <div class="form-group mb-3">
                         <input
                                 class="form-control"
                                 id="email"
                                 name="email"
-                                placeholder="Enter email address"
+                                placeholder="Enter your email address"
                                 th:field="*{email}"
                                 type="email"
                         />
@@ -86,27 +85,32 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label class="form-label">Password</label>
                         <input
                                 class="form-control"
                                 id="password"
                                 name="password"
-                                placeholder="Enter password"
+                                placeholder="Enter your password"
                                 th:field="*{password}"
                                 type="password"
                         />
                         <p th:errors = "*{password}" class="text-danger"
                            th:if="${#fields.hasErrors('password')}"></p>
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Register</button>
-                        <span>Already registered? <a th:href="@{/login}">Login here</a></span>
+                    <div class="form-group mb-3 pt-5 width-30 d-flex justify-content-around text-center"
+                    >
+                        <button type="submit" class="btn green-bg-white-text">
+                            Register
+                        </button>
+                    </div>
+
+                    <div class="form-group mb-3 pt-5 width-30 d-flex justify-content-around text-center">
+                        <a th:href="@{/login}">Login here</a>
                     </div>
                 </form>
             </div>
-        </div>
+
     </div>
-</div>
+
 </body>
 </html>
 </body>

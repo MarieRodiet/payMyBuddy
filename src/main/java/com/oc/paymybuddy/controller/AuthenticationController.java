@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -22,23 +23,23 @@ public class AuthenticationController {
     private UserAccountService userAccountService;
 
 
-    // handler method to handle user registration form request
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
-        // create model object to store form data
+        // create empty model object to store form data
         UserAccountDto user = new UserAccountDto();
         model.addAttribute("user", user);
         return "register";
     }
 
-    // handler method to handle user registration form submit request
-    @PostMapping("/register/save")
+    @PostMapping("/register")
     public String registration(@Valid @ModelAttribute("user") UserAccountDto userDto,
                                BindingResult result,
+                               RedirectAttributes redirectAttributes,
                                Model model){
-        UserAccount existingUser = userAccountService.findUserAccountByEmail(userDto.getEmail());
+        UserAccount isUserAlreadyRegistered = userAccountService.findUserAccountByEmail(userDto.getEmail());
 
-        if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
+        //isUserAlreadyRegistered should be null
+        if(isUserAlreadyRegistered != null && isUserAlreadyRegistered.getEmail() != null && !isUserAlreadyRegistered.getEmail().isEmpty()){
             result.rejectValue("email", null,
                     "There is already an account registered with the same email");
         }
@@ -49,13 +50,10 @@ public class AuthenticationController {
         }
 
         userAccountService.saveUserAccount(userDto);
-        List<UserAccountDto> userAccounts = userAccountService.findAllUserAccounts();
-        model.addAttribute("userAccounts", userAccounts);
-        return "users";
+        return "redirect:/login";
     }
 
 
-    // handler method to handle login request
     @GetMapping("/login")
     public String login(){
         return "login";
