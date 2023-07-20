@@ -37,6 +37,7 @@ public class SpringSecurity {
                                 .requestMatchers("/users").hasAuthority(Role.USER.name())
                                 .requestMatchers("/transfers").hasAuthority(Role.USER.name())
                                 .requestMatchers("/useraccounts").hasAuthority(Role.USER.name())
+                                .requestMatchers("/addconnection").hasAuthority(Role.USER.name())
                                 .anyRequest().authenticated()
 
                 ).formLogin(

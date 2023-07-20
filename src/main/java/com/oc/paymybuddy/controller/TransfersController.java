@@ -6,6 +6,7 @@ import com.oc.paymybuddy.entity.UserAccount;
 import com.oc.paymybuddy.repository.TransactionRepository;
 import com.oc.paymybuddy.service.TransactionService;
 import com.oc.paymybuddy.service.UserAccountService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -54,6 +57,17 @@ public class TransfersController {
         model.addAttribute("pages", new int[transactions.getTotalPages()]);
         model.addAttribute("totalPages", transactions.getTotalPages());
         model.addAttribute("currentPage", page);
+        return "transfers";
+    }
+
+    @PostMapping(path="/addconnection")
+    public String addNewConnection(
+            Model model,
+            @Valid @ModelAttribute("newConnection") String newConnection,
+            @RequestParam(name="page", defaultValue = "0") Integer page,
+            @RequestParam(name="size", defaultValue = "3") Integer size
+    ){
+        System.out.println(newConnection);
         return "transfers";
     }
 
