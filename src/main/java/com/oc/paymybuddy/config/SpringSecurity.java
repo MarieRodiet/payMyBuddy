@@ -1,6 +1,7 @@
 package com.oc.paymybuddy.config;
 
 import com.oc.paymybuddy.entity.Role;
+import com.oc.paymybuddy.security.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -8,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,7 +19,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SpringSecurity {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private CustomUserDetailsService userDetailsService;
 
     @Bean
     public static PasswordEncoder passwordEncoder(){
@@ -37,13 +37,13 @@ public class SpringSecurity {
                                 .requestMatchers("/users").hasAuthority(Role.USER.name())
                                 .requestMatchers("/transfers").hasAuthority(Role.USER.name())
                                 .requestMatchers("/useraccounts").hasAuthority(Role.USER.name())
+                                .requestMatchers("/addconnection").hasAuthority(Role.USER.name())
                                 .anyRequest().authenticated()
 
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
-                                .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/transfers")
+                                .defaultSuccessUrl("/transfers", true)
                                 .permitAll()
                 ).logout(
                         logout -> logout
@@ -54,10 +54,8 @@ public class SpringSecurity {
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
 }
