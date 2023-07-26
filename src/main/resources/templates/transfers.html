@@ -43,48 +43,71 @@
 
     </div>
     <div class="row">
-        <div class="col bg-light">
-            <nav aria-label="breadcrumb">
+        <nav class="col">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Transfer</li>
                 </ol>
-            </nav>
-        </div>
+        </nav>
     </div>
 <section class="pt-35 pb-35 width-80">
     <div class="flex justify-content-between pb-10">
         <p class="font-24"><b>Send Money</b></p>
-        <button class="blue-hover font-20 blue-bg-white-text font-20" type="button" data-toggle="modal" data-target="#modal">
+        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal">
             Add Connection
         </button>
     </div>
-    <div class="grey-bg-black-text flex justify-content-around rounded p-35">
-        <select
-                class="form-select mb-3 width-30"
-                aria-label="Select A Connection"
-                id="connections"
-                name="connections"
-        >
-            <option value="" disabled selected> Select A Connection
-            </option>
-            <option th:each="connection : ${connections}"
-                    th:value="${connection.id}"
-                    th:text="${connection.firstname} + ' ' + ${connection.lastname}"></option>
-        </select>
-        <div class="width-30">
-            <input
-                    class="form-control font-16 p-40"
-                    placeholder="0 €"
-                    type="number"
-                    id="quantity"
-                    name="quantity"
-                    min="1"
-                    max="5"
-            />
-        </div>
-        <span class="green-hover width-20 green-bg-white-text btn">Pay</span>
+
+    <div class="p-40 rounded bg-light">
+        <form method="post"
+              role="form"
+              th:action="@{/transfers}"
+              th:object="${transaction}"
+              class="form-row justify-content-center">
+            <div class="form-group col-md-5">
+                <select aria-label="Select A Connection"
+                        id="connections"
+                        name="connections"
+                        class="form-control"
+                        th:field="*{recipient}">
+                    <option value="" disabled selected> Select A Connection
+                    </option>
+                    <option th:each="connection : ${connections}"
+                            th:value="${connection.id}"
+                            th:text="${connection.firstname} + ' ' + ${connection.lastname}"></option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-3">
+                <input placeholder="0 €"
+                       type="number"
+                       id="amount"
+                       th:field="*{amount}"
+                       name="amount"
+                       min="1"
+                       max="1000"
+                       class="form-control">
+                <p th:errors = "*{amount}" class="text-danger"
+                   th:if="${#fields.hasErrors('amount')}"></p>
+            </div>
+            <div class="form-group col-md-4">
+                <button type="submit" class="btn btn-success width-100">Pay</button>
+            </div>
+            <div class="form-group col-md-12">
+                <input placeholder="Transfer Description"
+                       type="text"
+                       id="description"
+                       th:field="*{description}"
+                       name="description"
+                       class="form-control">
+                <p th:errors = "*{description}" class="text-danger"
+                   th:if="${#fields.hasErrors('description')}"></p>
+            </div>
+
+        </form>
     </div>
+
+
 </section>
 <section class="pt-35 pb-35 width-80">
     <p class="font-24"><b>My Transactions</b></p>
@@ -142,15 +165,16 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <input type="text" id="newConnection" name="newConnection" class="form-control font-16 p-40" placeholder="Connection's email address" />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">
-                    <a th:href="@{/addconnection}">Add</a>
-                </button>
-            </div>
+            <form method="post" role="form" th:action="@{/addconnection}">
+                <div class="modal-body">
+                    <input type="hidden" name="currentUserId" />
+                    <input type="text" id="recipientList" name="recipientList" class="form-control font-16 p-40" placeholder="Connection's email address" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

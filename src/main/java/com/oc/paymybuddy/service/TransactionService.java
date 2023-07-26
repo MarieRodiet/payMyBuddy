@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 
 @Service
 @AllArgsConstructor
@@ -18,5 +20,9 @@ public class TransactionService {
     public Page<Transaction> getTransactionsBySender(UserAccount userAccount, PageRequest pageRequest){
         Page<Transaction> transactions = transactionRepository.findTransactionsBySender(userAccount, pageRequest);
         return transactions;
+    }
+
+    public void saveTransaction(Transaction newTransaction) {
+        transactionRepository.save(newTransaction);
     }
 }

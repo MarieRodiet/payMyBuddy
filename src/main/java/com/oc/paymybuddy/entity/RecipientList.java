@@ -3,6 +3,8 @@ package com.oc.paymybuddy.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,4 +22,17 @@ public class RecipientList {
     @ManyToOne
     @JoinColumn(name = "id_recipient")
     private UserAccount recipient;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RecipientList that = (RecipientList) o;
+        return Objects.equals(sender, that.sender) && Objects.equals(recipient, that.recipient);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sender, recipient);
+    }
 }
