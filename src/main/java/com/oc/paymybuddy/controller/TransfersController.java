@@ -22,7 +22,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.math.BigDecimal;
 
 @Controller
 public class TransfersController {
@@ -93,7 +92,7 @@ public class TransfersController {
         newTransaction.setDescription(transaction.getDescription());
         transactionService.saveTransaction(newTransaction);
 
-        userAccountService.updateUserAccountBalance(currentUser, transaction.getAmount());
+        userAccountService.decreaseUserAccountBalance(currentUser, transaction.getAmount());
 
         Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page, size));
         List<RecipientList> connectionsIds = recipientListService.getRecipientListBySender(currentUser);

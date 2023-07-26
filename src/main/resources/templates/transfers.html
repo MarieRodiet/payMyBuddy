@@ -22,7 +22,7 @@
                         <a
                                 class="nav-link black-text"
                                 aria-current="page"
-                                th:href="@{/home}"
+                                th:href="@{/transfers}"
                         >Home</a
                         >
                     </li>
@@ -45,7 +45,7 @@
     <div class="row">
         <nav class="col">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/transfers}">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Transfer</li>
                 </ol>
         </nav>
@@ -165,7 +165,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" role="form" th:action="@{/addconnection}">
+            <form
+                    method="post"
+                    role="form"
+                    th:action="@{/addconnection}">
                 <div class="modal-body">
                     <input type="hidden" name="currentUserId" />
                     <input type="text" id="recipientList" name="recipientList" class="form-control font-16 p-40" placeholder="Connection's email address" />
