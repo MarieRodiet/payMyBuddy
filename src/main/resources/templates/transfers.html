@@ -55,7 +55,7 @@
 <section class="pt-35 pb-35 width-80">
     <div class="flex justify-content-between pb-10">
         <p class="font-24"><b>Send Money</b></p>
-        <button class="blue-hover font-20 blue-bg-white-text btn font-20" type="button" data-toggle="modal" data-target="#modal">
+        <button class="blue-hover font-20 blue-bg-white-text font-20" type="button" data-toggle="modal" data-target="#modal">
             Add Connection
         </button>
     </div>
@@ -68,10 +68,9 @@
         >
             <option value="" disabled selected> Select A Connection
             </option>
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="fiat">Fiat</option>
-            <option value="audi">Audi</option>
+            <option th:each="connection : ${connections}"
+                    th:value="${connection.id}"
+                    th:text="${connection.firstname} + ' ' + ${connection.lastname}"></option>
         </select>
         <div class="width-30">
             <input
@@ -95,13 +94,15 @@
             <th>Connections</th>
             <th>Description</th>
             <th>Amount</th>
+            <th>Date</th>
         </tr>
         </thead>
         <tbody>
             <tr th:each="transaction : ${transactions}">
-                <td th:text="${transaction.recipient.id}"></td>
+                <td th:text="${transaction.recipient.firstname} + ' ' + ${transaction.recipient.lastname} "></td>
                 <td th:text="${transaction.description}"></td>
                 <td th:text="${transaction.amount} + ' €'"></td>
+                <td th:text="${transaction.date}"></td>
             </tr>
         </tbody>
     </table>

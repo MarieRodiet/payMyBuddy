@@ -1,7 +1,7 @@
 package com.oc.paymybuddy.controller;
 
-import com.oc.paymybuddy.dto.UserAccountDto;
 import com.oc.paymybuddy.entity.UserAccount;
+import com.oc.paymybuddy.security.CustomUserDetailsService;
 import com.oc.paymybuddy.service.UserAccountService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,21 +19,23 @@ public class AuthenticationController {
     @Autowired
     private UserAccountService userAccountService;
 
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
         // create empty model object to store form data
-        UserAccountDto user = new UserAccountDto();
+        UserAccount user = new UserAccount();
         model.addAttribute("user", user);
         return "register";
     }
 
     @PostMapping("/register")
-    public String registration(@Valid @ModelAttribute("user") UserAccountDto userDto,
+    public String registration(@Valid @ModelAttribute("user") UserAccount user,
                                BindingResult result,
                                RedirectAttributes redirectAttributes,
                                Model model){
-        UserAccount isUserAlreadyRegistered = userAccountService.findUserAccountByEmail(userDto.getEmail());
+        UserAccount isUserAlreadyRegistered = userAccountService.findUserAccountByEmail(user.getEmail());
 
         //isUserAlreadyRegistered should be null
         if(isUserAlreadyRegistered != null && isUserAlreadyRegistered.getEmail() != null && !isUserAlreadyRegistered.getEmail().isEmpty()){
@@ -42,12 +44,13 @@ public class AuthenticationController {
         }
 
         if(result.hasErrors()){
-            model.addAttribute("user", userDto);
+            model.addAttribute("user", user);
             return "/register";
         }
 
-        userAccountService.saveUserAccount(userDto);
-        return "redirect:/login";
+        customUserDetailsService.saveUserAccount(user);
+        customUserDetailsService.authenticateUser(user);
+        return "redirect:/transfers";
     }
 
 
