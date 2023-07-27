@@ -112,7 +112,7 @@
 <section class="pt-35 pb-35 width-80">
     <p class="font-24"><b>My Transactions</b></p>
     <table class="grey-border no-border-spacing table table-striped table-hover">
-        <thead class="green-bg-white-text">
+        <thead class="bg-success text-white">
         <tr>
             <th>Connections</th>
             <th>Description</th>
@@ -130,8 +130,7 @@
         </tbody>
     </table>
 </section>
-<div class="pt-40">
-    <ul class="width-80 flex justify-content-center align-items-center pt-40">
+    <ul class="width-80 flex justify-content-center align-items-center pb-40">
         <li class="list-style-type-none pt-10 pb-10 pr-20 pl-20 white-bg-blue-text grey-border rounded-left">
             <a th:if="${currentPage > 0}" th:href="@{transfers(page=${currentPage - 1})}" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
@@ -154,7 +153,6 @@
             </a>
         </li>
     </ul>
-</div>
 <!-- Modal -->
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
