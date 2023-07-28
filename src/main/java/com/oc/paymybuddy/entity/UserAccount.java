@@ -39,7 +39,6 @@ public class UserAccount implements UserDetails {
     @Column(name = "account_nb")
     private String accountNumber;
 
-    @NotEmpty(message = "Balance should not be empty")
     private BigDecimal balance;
     private String role;
 

@@ -22,7 +22,7 @@
                         <a
                                 class="nav-link black-text"
                                 aria-current="page"
-                                th:href="@{/home}"
+                                th:href="@{/transfers}"
                         >Home</a
                         >
                     </li>
@@ -45,7 +45,7 @@
     <div class="row">
         <nav class="col">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/transfers}">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Transfer</li>
                 </ol>
         </nav>
@@ -53,9 +53,18 @@
 <section class="pt-35 pb-35 width-80">
     <div class="flex justify-content-between pb-10">
         <p class="font-24"><b>Send Money</b></p>
-        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal">
+        <button
+                class="btn btn-primary"
+                type="button"
+                data-toggle="modal"
+                data-target="#modal">
             Add Connection
         </button>
+    </div>
+    <div th:if="${connectionResult} != null">
+        <span th:attr="class=${connectionResult == 'error' ? 'text-danger' : 'text-success'}"
+              th:if="${connectionResult == 'error' ? 'Email does not exist' : 'Email successfully added}"
+        ></span>
     </div>
 
     <div class="p-40 rounded bg-light">
@@ -112,7 +121,7 @@
 <section class="pt-35 pb-35 width-80">
     <p class="font-24"><b>My Transactions</b></p>
     <table class="grey-border no-border-spacing table table-striped table-hover">
-        <thead class="green-bg-white-text">
+        <thead class="bg-success text-white">
         <tr>
             <th>Connections</th>
             <th>Description</th>
@@ -130,8 +139,7 @@
         </tbody>
     </table>
 </section>
-<div class="pt-40">
-    <ul class="width-80 flex justify-content-center align-items-center pt-40">
+    <ul class="width-80 flex justify-content-center align-items-center pb-40">
         <li class="list-style-type-none pt-10 pb-10 pr-20 pl-20 white-bg-blue-text grey-border rounded-left">
             <a th:if="${currentPage > 0}" th:href="@{transfers(page=${currentPage - 1})}" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
@@ -154,7 +162,6 @@
             </a>
         </li>
     </ul>
-</div>
 <!-- Modal -->
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -165,7 +172,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" role="form" th:action="@{/addconnection}">
+            <form
+                    method="post"
+                    role="form"
+                    th:action="@{/addconnection}">
                 <div class="modal-body">
                     <input type="hidden" name="currentUserId" />
                     <input type="text" id="recipientList" name="recipientList" class="form-control font-16 p-40" placeholder="Connection's email address" />

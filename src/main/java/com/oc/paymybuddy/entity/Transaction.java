@@ -24,6 +24,7 @@ public class Transaction {
     @JoinColumn(name = "id_sender")
     private UserAccount sender;
 
+    @NotNull
     @ManyToOne(cascade = CascadeType.ALL)
     @OrderColumn
     @JoinColumn(name = "id_recipient")

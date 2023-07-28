@@ -19,6 +19,16 @@ public class UserAccountService{
         return userAccountRepository.findByEmail(email);
     }
 
+    public UserAccount saveUserAccount(UserAccount userAccount){
+        UserAccount user = userAccountRepository.findByEmail(userAccount.getEmail());
+        user.setFirstname(userAccount.getFirstname());
+        user.setLastname(userAccount.getLastname());
+        user.setAccountNumber(userAccount.getAccountNumber());
+        user.setBalance(userAccount.getBalance());
+        userAccountRepository.save(user);
+        return user;
+    }
+
 
     public List<UserAccount> findAllUserAccounts() {
         List<UserAccount> userAccounts = userAccountRepository.findAll();
@@ -26,12 +36,17 @@ public class UserAccountService{
                 .collect(Collectors.toList());
     }
 
-    public void updateUserAccountBalance(UserAccount userAccount, BigDecimal balance){
+    public void decreaseUserAccountBalance(UserAccount userAccount, BigDecimal balance){
         BigDecimal increaseAmount= balance
                 .multiply(new BigDecimal("0.5"))
                 .divide(new BigDecimal(100))
                 .add(balance);
         BigDecimal newBalance = userAccount.getBalance().subtract(increaseAmount);
+        userAccountRepository.updateUserAccountBalance(userAccount.getId(), newBalance);
+    }
+
+    public void increaseUserAccountBalance(UserAccount userAccount, BigDecimal balance){
+        BigDecimal newBalance = userAccount.getBalance().add(balance);
         userAccountRepository.updateUserAccountBalance(userAccount.getId(), newBalance);
     }
 

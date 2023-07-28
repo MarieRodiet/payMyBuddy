@@ -14,15 +14,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.math.BigDecimal;
 
 @Controller
 public class TransfersController {
@@ -69,6 +70,9 @@ public class TransfersController {
                             .anyMatch(a -> Objects.equals(userAccount.getId(), a.getRecipient().getId())))
                 .collect(Collectors.toList());
         model.addAttribute("transaction", new Transaction());
+        if(connectionObjects.isEmpty()){
+            connectionObjects = new ArrayList<>();
+        }
         model.addAttribute("connections", connectionObjects);
         model.addAttribute("transactions", transactions.getContent());
         model.addAttribute("pages", new int[transactions.getTotalPages()]);
@@ -79,7 +83,7 @@ public class TransfersController {
 
     @PostMapping(path="/transfers")
     public String postTransaction(Model model,
-                               @Valid Transaction transaction,
+                               @Valid Transaction transaction, BindingResult result,
                                @RequestParam(name="page", defaultValue = "0") Integer page,
                                @RequestParam(name="size", defaultValue = "10") Integer size){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -93,7 +97,7 @@ public class TransfersController {
         newTransaction.setDescription(transaction.getDescription());
         transactionService.saveTransaction(newTransaction);
 
-        userAccountService.updateUserAccountBalance(currentUser, transaction.getAmount());
+        userAccountService.decreaseUserAccountBalance(currentUser, transaction.getAmount());
 
         Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page, size));
         List<RecipientList> connectionsIds = recipientListService.getRecipientListBySender(currentUser);
@@ -104,7 +108,15 @@ public class TransfersController {
                                 .stream()
                                 .anyMatch(a -> Objects.equals(userAccount.getId(), a.getRecipient().getId())))
                 .collect(Collectors.toList());
-
+        if(connectionObjects.isEmpty()){
+            connectionObjects = new ArrayList<>();
+        }
+        if (result.hasErrors()) {
+            result.rejectValue("transaction", null,
+                    "Amount should be greater than or equal to 0.01");
+            result.rejectValue("recipient", null,
+                    "A recipient needs to be selected");
+        }
         model.addAttribute("connections", connectionObjects);
         model.addAttribute("transactions", transactions.getContent());
         model.addAttribute("pages", new int[transactions.getTotalPages()]);
@@ -122,8 +134,17 @@ public class TransfersController {
         UserAccount currentUser = userAccountService.findUserAccountByEmail(authentication.getName());
         RecipientList newRecipientList = new RecipientList();
         newRecipientList.setSender(currentUser);
-        newRecipientList.setRecipient(userAccountService.findUserAccountByEmail(recipientList));
-        RecipientList saved = recipientListService.saveRecipientList(newRecipientList);
+        UserAccount foundRecipient = userAccountService.findUserAccountByEmail(recipientList);
+        if(Objects.isNull(foundRecipient)){
+            model.addAttribute("connectionResult", "error");
+        }
+        else{
+            model.addAttribute("connectionResult", "success");
+            newRecipientList.setRecipient(foundRecipient);
+            recipientListService.saveRecipientList(newRecipientList);
+        }
+
+
         return "redirect:/transfers";
     }
 
