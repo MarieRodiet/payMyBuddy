@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ProfileController {
@@ -61,18 +62,14 @@ public class ProfileController {
     @PostMapping("/editProfile")
     public String editProfile(
             Model model,
-            @ModelAttribute("userAccount") @Valid UserAccount updatedUserAccount,
+            RedirectAttributes redirectAttributes,
+            @ModelAttribute("userAccount") UserAccount updatedUserAccount,
             BindingResult result) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserAccount currentUser = userAccountService.findUserAccountByEmail(authentication.getName());
-        currentUser.setFirstname(updatedUserAccount.getFirstname());
-        currentUser.setLastname(updatedUserAccount.getLastname());
-        currentUser.setAccountNumber(updatedUserAccount.getAccountNumber());
-        currentUser.setBalance(updatedUserAccount.getBalance());
         if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("error", "Your profile could not be updated");
             return "editProfile"; // Return to the edit profile page with errors
         }
-        model.addAttribute("currentUser", currentUser);
+        model.addAttribute("currentUser", userAccountService.findCurrentUser());
         userAccountService.saveUserAccount(updatedUserAccount);
         return "redirect:/profile";
     }

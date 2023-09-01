@@ -10,6 +10,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body class="container">
+    <div th:if="${error}">
+        <div th:text="${error}" class="alert alert-danger"></div>
+    </div>
+    <div th:if="${success}">
+        <div th:text="${success}" class="success alert-success"></div>
+    </div>
     <div class="text-dark font-18 pt-40 pb-40 d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
             <button class="btn btn-lg green-bg-white-text rounded">Pay My Buddy</button>
@@ -178,7 +184,7 @@
                     th:action="@{/addconnection}">
                 <div class="modal-body">
                     <input type="hidden" name="currentUserId" />
-                    <input type="text" id="recipientList" name="recipientList" class="form-control font-16 p-40" placeholder="Connection's email address" />
+                    <input type="text" id="email" name="email" class="form-control font-16 p-40" placeholder="Connection's email address" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
