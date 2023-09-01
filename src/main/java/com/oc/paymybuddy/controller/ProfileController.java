@@ -60,11 +60,19 @@ public class ProfileController {
 
     @PostMapping("/editProfile")
     public String editProfile(
-            @ModelAttribute("currentUser") @Valid UserAccount updatedUserAccount,
+            Model model,
+            @ModelAttribute("userAccount") @Valid UserAccount updatedUserAccount,
             BindingResult result) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserAccount currentUser = userAccountService.findUserAccountByEmail(authentication.getName());
+        currentUser.setFirstname(updatedUserAccount.getFirstname());
+        currentUser.setLastname(updatedUserAccount.getLastname());
+        currentUser.setAccountNumber(updatedUserAccount.getAccountNumber());
+        currentUser.setBalance(updatedUserAccount.getBalance());
         if (result.hasErrors()) {
             return "editProfile"; // Return to the edit profile page with errors
         }
+        model.addAttribute("currentUser", currentUser);
         userAccountService.saveUserAccount(updatedUserAccount);
         return "redirect:/profile";
     }

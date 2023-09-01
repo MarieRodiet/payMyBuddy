@@ -53,9 +53,18 @@
 <section class="pt-35 pb-35 width-80">
     <div class="flex justify-content-between pb-10">
         <p class="font-24"><b>Send Money</b></p>
-        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal">
+        <button
+                class="btn btn-primary"
+                type="button"
+                data-toggle="modal"
+                data-target="#modal">
             Add Connection
         </button>
+    </div>
+    <div th:if="${connectionResult} != null">
+        <span th:attr="class=${connectionResult == 'error' ? 'text-danger' : 'text-success'}"
+              th:if="${connectionResult == 'error' ? 'Email does not exist' : 'Email successfully added}"
+        ></span>
     </div>
 
     <div class="p-40 rounded bg-light">
