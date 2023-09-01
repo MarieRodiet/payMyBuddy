@@ -14,11 +14,14 @@
         <div th:text="${error}" class="alert alert-danger"></div>
     </div>
     <div th:if="${success}">
-        <div th:text="${success}" class="success alert-success"></div>
+        <div th:text="${success}" class="alert alert-success"></div>
+    </div>
+    <div th:if="${info}">
+        <div th:text="${info}" class="alert alert-info"></div>
     </div>
     <div class="text-dark font-18 pt-40 pb-40 d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-            <button class="btn btn-lg green-bg-white-text rounded">Pay My Buddy</button>
+            <button class="btn btn-lg text-white bg-success rounded">Pay My Buddy</button>
         </div>
             <nav
                     class="d-flex justify-content-end align-items-center"
@@ -140,7 +143,7 @@
                 <td th:text="${transaction.recipient.firstname} + ' ' + ${transaction.recipient.lastname} "></td>
                 <td th:text="${transaction.description}"></td>
                 <td th:text="${transaction.amount} + ' €'"></td>
-                <td th:text="${transaction.date}"></td>
+                <td th:text="${#dates.format(transaction.date, 'dd-MM-yyyy')}"></td>
             </tr>
         </tbody>
     </table>
@@ -184,7 +187,7 @@
                     th:action="@{/addconnection}">
                 <div class="modal-body">
                     <input type="hidden" name="currentUserId" />
-                    <input type="text" id="email" name="email" class="form-control font-16 p-40" placeholder="Connection's email address" />
+                    <input type="text" id="email" name="email" required class="form-control font-16 p-40" placeholder="Connection's email address" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
