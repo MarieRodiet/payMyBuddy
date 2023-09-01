@@ -35,7 +35,7 @@ public class AuthenticationController {
                                BindingResult result,
                                RedirectAttributes redirectAttributes,
                                Model model){
-        UserAccount isUserAlreadyRegistered = userAccountService.findUserAccountByEmail(user.getEmail());
+        UserAccount isUserAlreadyRegistered = userAccountService.findCurrentUser();
 
         //isUserAlreadyRegistered should be null
         if(isUserAlreadyRegistered != null && isUserAlreadyRegistered.getEmail() != null && !isUserAlreadyRegistered.getEmail().isEmpty()){

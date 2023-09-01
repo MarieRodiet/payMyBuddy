@@ -10,13 +10,12 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
 import java.util.List;
@@ -34,8 +33,6 @@ public class TransfersController {
 
     @Autowired
     private RecipientListService recipientListService;
-
-
 
     // handler method to handle list of users
     @GetMapping("/users")
@@ -56,19 +53,12 @@ public class TransfersController {
     public String getTransfers(Model model,
                                @RequestParam(name="page", defaultValue = "0") Integer page,
                                @RequestParam(name="size", defaultValue = "10") Integer size){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserAccount currentUser = userAccountService.findUserAccountByEmail(authentication.getName());
+        UserAccount currentUser = userAccountService.findCurrentUser();
         Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page, size));
-        List<RecipientList> connectionsIds = recipientListService.getRecipientListBySender(currentUser);
-        List<UserAccount> connectionObjects = userAccountService.findAllUserAccounts()
-                .stream()
-                .filter(userAccount ->
-                    connectionsIds
-                            .stream()
-                            .anyMatch(a -> Objects.equals(userAccount.getId(), a.getRecipient().getId())))
-                .collect(Collectors.toList());
+        List<UserAccount> connections = recipientListService.getRecipientListBySender(currentUser, userAccountService.findAllUserAccounts());
+
         model.addAttribute("transaction", new Transaction());
-        model.addAttribute("connections", connectionObjects);
+        model.addAttribute("connections", connections);
         model.addAttribute("transactions", transactions.getContent());
         model.addAttribute("pages", new int[transactions.getTotalPages()]);
         model.addAttribute("totalPages", transactions.getTotalPages());
@@ -81,8 +71,7 @@ public class TransfersController {
                                @Valid Transaction transaction,
                                @RequestParam(name="page", defaultValue = "0") Integer page,
                                @RequestParam(name="size", defaultValue = "10") Integer size){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserAccount currentUser = userAccountService.findUserAccountByEmail(authentication.getName());
+        UserAccount currentUser = userAccountService.findCurrentUser();
 
         Transaction newTransaction = new Transaction();
         newTransaction.setSender(currentUser);
@@ -95,16 +84,9 @@ public class TransfersController {
         userAccountService.decreaseUserAccountBalance(currentUser, transaction.getAmount());
 
         Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page, size));
-        List<RecipientList> connectionsIds = recipientListService.getRecipientListBySender(currentUser);
-        List<UserAccount> connectionObjects = userAccountService.findAllUserAccounts()
-                .stream()
-                .filter(userAccount ->
-                        connectionsIds
-                                .stream()
-                                .anyMatch(a -> Objects.equals(userAccount.getId(), a.getRecipient().getId())))
-                .collect(Collectors.toList());
+        List<UserAccount> connections = recipientListService.getRecipientListBySender(currentUser, userAccountService.findAllUserAccounts());
 
-        model.addAttribute("connections", connectionObjects);
+        model.addAttribute("connections", connections);
         model.addAttribute("transactions", transactions.getContent());
         model.addAttribute("pages", new int[transactions.getTotalPages()]);
         model.addAttribute("totalPages", transactions.getTotalPages());
@@ -114,15 +96,21 @@ public class TransfersController {
 
     @PostMapping(path="/addconnection")
     public String addNewConnection(
-            Model model,
-            String recipientList
+            String email,
+            RedirectAttributes redirectAttributes
     ){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserAccount currentUser = userAccountService.findUserAccountByEmail(authentication.getName());
-        RecipientList newRecipientList = new RecipientList();
-        newRecipientList.setSender(currentUser);
-        newRecipientList.setRecipient(userAccountService.findUserAccountByEmail(recipientList));
-        RecipientList saved = recipientListService.saveRecipientList(newRecipientList);
+        UserAccount currentUser = userAccountService.findCurrentUser();
+        UserAccount recipientUserAccount = userAccountService.findUserAccountByEmail(email);
+        if(recipientUserAccount != null){
+            RecipientList newRecipientList = new RecipientList();
+            newRecipientList.setSender(currentUser);
+            newRecipientList.setRecipient(userAccountService.findUserAccountByEmail(email));
+            recipientListService.saveRecipientList(newRecipientList);
+            redirectAttributes.addFlashAttribute("success", "This recipient was added successfully");
+        }
+        else{
+            redirectAttributes.addFlashAttribute("error", "No user known with this email address");
+        }
         return "redirect:/transfers";
     }
 
