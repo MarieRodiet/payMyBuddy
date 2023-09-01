@@ -10,9 +10,15 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body class="container">
+  <div th:if="${error}">
+    <div th:text="${error}" class="alert alert-danger"></div>
+  </div>
+  <div th:if="${success}">
+    <div th:text="${success}" class="alert alert-success"></div>
+  </div>
   <div class="text-dark font-18 pt-40 pb-40 d-flex justify-content-between align-items-center">
     <div class="d-flex align-items-center">
-      <button class="btn btn-lg green-bg-white-text rounded">Pay My Buddy</button>
+      <button class="btn btn-lg text-white bg-success rounded">Pay My Buddy</button>
     </div>
     <nav
             class="d-flex justify-content-end align-items-center"
@@ -87,7 +93,7 @@
               role="form"
               th:action="@{/addmoney}">
           <div class="modal-body">
-            <input type="number" id="money" name="money" class="form-control font-16 p-40" placeholder="Add the amount of money you want to add" />
+            <input type="number" id="money" name="money" required class="form-control font-16 p-40" placeholder="Add the amount of money you want to add" />
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
