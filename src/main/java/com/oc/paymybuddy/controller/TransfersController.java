@@ -36,20 +36,6 @@ public class TransfersController {
     @Autowired
     private RecipientListService recipientListService;
 
-    // handler method to handle list of users
-    @GetMapping("/users")
-    public String users(Model model){
-        List<UserAccount> users = userAccountService.findAllUserAccounts();
-        model.addAttribute("users", users);
-        return "users";
-    }
-
-    @GetMapping(path="/useraccounts")
-    public String getUserAccounts(Model model){
-        List<UserAccount> userAccounts = userAccountService.findAllUserAccounts();
-        model.addAttribute("userAccounts", userAccounts);
-        return "useraccounts";
-    }
 
     @GetMapping(path="/transfers")
     public String getTransfers(Model model,
