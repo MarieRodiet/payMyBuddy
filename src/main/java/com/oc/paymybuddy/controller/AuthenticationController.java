@@ -27,7 +27,6 @@ public class AuthenticationController {
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
-        // create empty model object to store form data
         UserAccount user = new UserAccount();
         model.addAttribute("user", user);
         logger.info("register page");

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -46,13 +45,11 @@ public class TransfersController {
         Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page -1, size));
         List<UserAccount> connections = recipientListService.getRecipientListBySender(currentUser, userAccountService.findAllUserAccounts());
 
-        int[] pages = new int[transactions.getTotalPages()];
-        Integer totalPages = transactions.getTotalPages();
         model.addAttribute("transaction", new Transaction());
         model.addAttribute("connections", connections);
         model.addAttribute("transactions", transactions.getContent());
-        model.addAttribute("pages", pages);
-        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("pages", new int[transactions.getTotalPages()]);
+        model.addAttribute("totalPages", transactions.getTotalPages());
         model.addAttribute("currentPage", page);
         return "transfers";
     }
@@ -67,12 +64,7 @@ public class TransfersController {
             logger.error("could not add Transaction for user");
         }
         else{
-            Transaction newTransaction = new Transaction();
-            newTransaction.setSender(currentUser);
-            newTransaction.setRecipient(transaction.getRecipient());
-            newTransaction.setAmount(transaction.getAmount());
-            newTransaction.setDate(new Date());
-            newTransaction.setDescription(transaction.getDescription());
+            Transaction newTransaction = transactionService.createTransaction(currentUser, transaction.getRecipient(), transaction.getAmount(), transaction.getDescription());
             transactionService.saveTransaction(newTransaction);
 
             userAccountService.decreaseUserAccountBalance(currentUser, transaction.getAmount());
@@ -98,9 +90,8 @@ public class TransfersController {
         UserAccount currentUser = userAccountService.findCurrentUser();
         UserAccount recipientUserAccount = userAccountService.findUserAccountByEmail(email);
         if(recipientUserAccount != null){
-            RecipientList newRecipientList = new RecipientList();
-            newRecipientList.setSender(currentUser);
-            newRecipientList.setRecipient(userAccountService.findUserAccountByEmail(email));
+            RecipientList newRecipientList = recipientListService.createRecipientList(currentUser, userAccountService.findUserAccountByEmail(email));
+
             if(recipientListService.checkIfRecipientListExists(newRecipientList)){
                 redirectAttributes.addFlashAttribute("info", "This email is already in a recipient");
             }

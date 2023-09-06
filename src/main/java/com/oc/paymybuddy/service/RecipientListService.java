@@ -40,4 +40,11 @@ public class RecipientListService {
         return all.stream().anyMatch(r -> Objects.equals(r, recipientList));
     }
 
+    public RecipientList createRecipientList(UserAccount sender, UserAccount recipient){
+        RecipientList newRecipientList = new RecipientList();
+        newRecipientList.setSender(sender);
+        newRecipientList.setRecipient(recipient);
+        return  newRecipientList;
+    }
+
 }

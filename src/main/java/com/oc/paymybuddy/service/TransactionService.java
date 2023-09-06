@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -32,5 +33,15 @@ public class TransactionService {
 
     public void saveTransaction(Transaction newTransaction) {
         transactionRepository.save(newTransaction);
+    }
+
+    public Transaction createTransaction(UserAccount sender, UserAccount recipient, BigDecimal amount, String description){
+        Transaction newTransaction = new Transaction();
+        newTransaction.setSender(sender);
+        newTransaction.setRecipient(recipient);
+        newTransaction.setAmount(amount);
+        newTransaction.setDate(new Date());
+        newTransaction.setDescription(description);
+        return newTransaction;
     }
 }
