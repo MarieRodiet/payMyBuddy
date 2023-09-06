@@ -150,17 +150,17 @@
 </section>
     <ul class="width-80 flex justify-content-center align-items-center pb-40">
         <li class="list-style-type-none pt-10 pb-10 pr-20 pl-20 white-bg-blue-text grey-border rounded-left">
-            <a th:if="${currentPage > 0}" th:href="@{transfers(page=${currentPage - 1})}" aria-label="Previous">
+            <a th:if="${currentPage > 1}" th:href="@{transfers(page=${currentPage - 1})}" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
-            <a th:unless="${currentPage > 0}" class="isDisabled" aria-label="Previous">
+            <a th:unless="${currentPage > 1}" class="isDisabled" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         <li class="list-style-type-none" th:each="page, status: ${pages}">
-            <a th:class="${status.index == currentPage ? 'pt-10 pb-10 pr-20 pl-20 blue-bg-white-text grey-border' : 'pt-10 pb-10 pr-20 pl-20 white-bg-blue-text grey-border' }"
-               th:text="${status.index}"
-               th:href="@{transfers(page=${status.index})}"></a>
+            <a th:class="${status.index + 1 == currentPage ? 'pt-10 pb-10 pr-20 pl-20 blue-bg-white-text grey-border' : 'pt-10 pb-10 pr-20 pl-20 white-bg-blue-text grey-border' }"
+               th:text="${status.index + 1}"
+               th:href="@{transfers(page=${status.index + 1})}"></a>
         </li>
         <li class="list-style-type-none pt-10 pb-10 pr-20 pl-20 white-bg-blue-text grey-border rounded-right">
             <a th:if="${currentPage < totalPages}" th:href="@{transfers(page=${currentPage + 1})}" aria-label="Next">

@@ -39,18 +39,20 @@ public class TransfersController {
 
     @GetMapping(path="/transfers")
     public String getTransfers(Model model,
-                               @RequestParam(name="page", defaultValue = "0") Integer page,
+                               @RequestParam(name="page", defaultValue = "1") Integer page,
                                @RequestParam(name="size", defaultValue = "10") Integer size){
         UserAccount currentUser = userAccountService.findCurrentUser();
         logger.info("getting all transactions and connections associated to user");
-        Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page, size));
+        Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page -1, size));
         List<UserAccount> connections = recipientListService.getRecipientListBySender(currentUser, userAccountService.findAllUserAccounts());
 
+        int[] pages = new int[transactions.getTotalPages()];
+        Integer totalPages = transactions.getTotalPages();
         model.addAttribute("transaction", new Transaction());
         model.addAttribute("connections", connections);
         model.addAttribute("transactions", transactions.getContent());
-        model.addAttribute("pages", new int[transactions.getTotalPages()]);
-        model.addAttribute("totalPages", transactions.getTotalPages());
+        model.addAttribute("pages", pages);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("currentPage", page);
         return "transfers";
     }
@@ -58,7 +60,7 @@ public class TransfersController {
     @PostMapping(path="/transfers")
     public String postTransaction(Model model,
                                @Valid Transaction transaction, BindingResult result, RedirectAttributes redirectAttributes,
-                               @RequestParam(name="page", defaultValue = "0") Integer page,
+                               @RequestParam(name="page", defaultValue = "1") Integer page,
                                @RequestParam(name="size", defaultValue = "10") Integer size){
         UserAccount currentUser = userAccountService.findCurrentUser();
         if(result.hasErrors()){
