@@ -1,9 +1,9 @@
 package com.oc.paymybuddy.controller;
 
-import com.oc.paymybuddy.entity.RecipientList;
+import com.oc.paymybuddy.entity.SenderRecipientConnection;
 import com.oc.paymybuddy.entity.Transaction;
 import com.oc.paymybuddy.entity.UserAccount;
-import com.oc.paymybuddy.service.RecipientListService;
+import com.oc.paymybuddy.service.SenderRecipientConnectionService;
 import com.oc.paymybuddy.service.TransactionService;
 import com.oc.paymybuddy.service.UserAccountService;
 import jakarta.validation.Valid;
@@ -33,7 +33,7 @@ public class TransfersController {
     private TransactionService transactionService;
 
     @Autowired
-    private RecipientListService recipientListService;
+    private SenderRecipientConnectionService senderRecipientConnectionService;
 
 
     @GetMapping(path="/transfers")
@@ -43,7 +43,7 @@ public class TransfersController {
         UserAccount currentUser = userAccountService.findCurrentUser();
         logger.info("getting all transactions and connections associated to user");
         Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page -1, size));
-        List<UserAccount> connections = recipientListService.getRecipientListBySender(currentUser, userAccountService.findAllUserAccounts());
+        List<UserAccount> connections = senderRecipientConnectionService.getSenderRecipientConnectionBySender(currentUser, userAccountService.findAllUserAccounts());
 
         model.addAttribute("transaction", new Transaction());
         model.addAttribute("connections", connections);
@@ -71,8 +71,8 @@ public class TransfersController {
             logger.info("saving transaction and updating user's balance");
         }
 
-        Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page, size));
-        List<UserAccount> connections = recipientListService.getRecipientListBySender(currentUser, userAccountService.findAllUserAccounts());
+        Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page -1, size));
+        List<UserAccount> connections = senderRecipientConnectionService.getSenderRecipientConnectionBySender(currentUser, userAccountService.findAllUserAccounts());
 
         model.addAttribute("connections", connections);
         model.addAttribute("transactions", transactions.getContent());
@@ -90,14 +90,14 @@ public class TransfersController {
         UserAccount currentUser = userAccountService.findCurrentUser();
         UserAccount recipientUserAccount = userAccountService.findUserAccountByEmail(email);
         if(recipientUserAccount != null){
-            RecipientList newRecipientList = recipientListService.createRecipientList(currentUser, userAccountService.findUserAccountByEmail(email));
+            SenderRecipientConnection newSenderRecipientConnection = senderRecipientConnectionService.createSenderRecipientConnection(currentUser, userAccountService.findUserAccountByEmail(email));
 
-            if(recipientListService.checkIfRecipientListExists(newRecipientList)){
+            if(senderRecipientConnectionService.checkIfsenderRecipientConnectionRepositoryExists(newSenderRecipientConnection)){
                 redirectAttributes.addFlashAttribute("info", "This email is already in a recipient");
             }
             else{
                 logger.info("added new connection for current user");
-                recipientListService.saveRecipientList(newRecipientList);
+                senderRecipientConnectionService.saveSenderRecipientConnectionRepository(newSenderRecipientConnection);
                 redirectAttributes.addFlashAttribute("success", "This recipient was added successfully");
             }
         }
