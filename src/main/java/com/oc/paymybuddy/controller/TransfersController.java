@@ -41,6 +41,10 @@ public class TransfersController {
                                @RequestParam(name="page", defaultValue = "1") Integer page,
                                @RequestParam(name="size", defaultValue = "10") Integer size){
         UserAccount currentUser = userAccountService.findCurrentUser();
+        if (currentUser == null) {
+            // Redirect to the login page
+            return "redirect:/login";
+        }
         logger.info("getting all transactions and connections associated to user");
         Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page -1, size));
         List<UserAccount> connections = senderRecipientConnectionService.getSenderRecipientConnectionBySender(currentUser, userAccountService.findAllUserAccounts());
