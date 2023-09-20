@@ -42,6 +42,7 @@ public class ProfileController {
 
         if (money == null || money <= 0) {
             logger.error("could not add money to account");
+            model.addAttribute("currentUser", currentUser);
             model.addAttribute("error", "Invalid amount. Please enter a positive value.");
             return "profile";
         }
