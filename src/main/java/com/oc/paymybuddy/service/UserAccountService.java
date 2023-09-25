@@ -3,6 +3,8 @@ package com.oc.paymybuddy.service;
 import com.oc.paymybuddy.entity.UserAccount;
 import com.oc.paymybuddy.repository.UserAccountRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -42,12 +44,21 @@ public class UserAccountService{
                 .divide(new BigDecimal(100))
                 .add(balance);
         BigDecimal newBalance = userAccount.getBalance().subtract(increaseAmount);
-        userAccountRepository.updateUserAccountBalance(userAccount.getId(), newBalance);
+        userAccount.setBalance(newBalance);
+        userAccountRepository.save(userAccount);
+
     }
 
-    public void increaseUserAccountBalance(UserAccount userAccount, BigDecimal balance){
-        BigDecimal newBalance = userAccount.getBalance().add(balance);
-        userAccountRepository.updateUserAccountBalance(userAccount.getId(), newBalance);
+    public UserAccount updateUserAccountBalance(UserAccount userAccount, Integer money){
+        BigDecimal newBalance = userAccount.getBalance().add(BigDecimal.valueOf(money));
+        userAccount.setBalance(newBalance);
+        return userAccountRepository.save(userAccount);
+    }
+
+    public UserAccount findCurrentUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        return findUserAccountByEmail(email);
     }
 
 }

@@ -26,6 +26,7 @@ public class UserAccount implements UserDetails {
 
     @NotEmpty(message = "Email should not be empty")
     @Email
+    @Column(unique = true)
     private String email;
 
     @NotEmpty(message = "Password should not be empty")

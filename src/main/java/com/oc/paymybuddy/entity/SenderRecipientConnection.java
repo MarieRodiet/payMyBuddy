@@ -10,8 +10,8 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "recipient_lists")
-public class RecipientList {
+@Table(name = "sender_recipient_connection")
+public class SenderRecipientConnection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -27,7 +27,7 @@ public class RecipientList {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RecipientList that = (RecipientList) o;
+        SenderRecipientConnection that = (SenderRecipientConnection) o;
         return Objects.equals(sender, that.sender) && Objects.equals(recipient, that.recipient);
     }
 

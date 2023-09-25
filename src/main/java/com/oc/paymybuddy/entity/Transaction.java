@@ -33,7 +33,7 @@ public class Transaction {
     @NotNull(message = "Amount should not be null")
     @DecimalMin(value = "0.01", inclusive = true, message = "Amount should be greater than or equal to 0.01")
     private BigDecimal amount;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     private String description;

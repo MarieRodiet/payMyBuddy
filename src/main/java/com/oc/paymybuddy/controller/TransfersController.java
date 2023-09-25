@@ -1,32 +1,30 @@
 package com.oc.paymybuddy.controller;
 
-import com.oc.paymybuddy.entity.RecipientList;
+import com.oc.paymybuddy.entity.SenderRecipientConnection;
 import com.oc.paymybuddy.entity.Transaction;
 import com.oc.paymybuddy.entity.UserAccount;
-import com.oc.paymybuddy.service.RecipientListService;
+import com.oc.paymybuddy.service.SenderRecipientConnectionService;
 import com.oc.paymybuddy.service.TransactionService;
 import com.oc.paymybuddy.service.UserAccountService;
 import jakarta.validation.Valid;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Controller
 public class TransfersController {
+    private static final Logger logger = getLogger(TransfersController.class);
 
     @Autowired
     private UserAccountService userAccountService;
@@ -35,45 +33,24 @@ public class TransfersController {
     private TransactionService transactionService;
 
     @Autowired
-    private RecipientListService recipientListService;
+    private SenderRecipientConnectionService senderRecipientConnectionService;
 
-
-
-    // handler method to handle list of users
-    @GetMapping("/users")
-    public String users(Model model){
-        List<UserAccount> users = userAccountService.findAllUserAccounts();
-        model.addAttribute("users", users);
-        return "users";
-    }
-
-    @GetMapping(path="/useraccounts")
-    public String getUserAccounts(Model model){
-        List<UserAccount> userAccounts = userAccountService.findAllUserAccounts();
-        model.addAttribute("userAccounts", userAccounts);
-        return "useraccounts";
-    }
 
     @GetMapping(path="/transfers")
     public String getTransfers(Model model,
-                               @RequestParam(name="page", defaultValue = "0") Integer page,
+                               @RequestParam(name="page", defaultValue = "1") Integer page,
                                @RequestParam(name="size", defaultValue = "10") Integer size){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserAccount currentUser = userAccountService.findUserAccountByEmail(authentication.getName());
-        Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page, size));
-        List<RecipientList> connectionsIds = recipientListService.getRecipientListBySender(currentUser);
-        List<UserAccount> connectionObjects = userAccountService.findAllUserAccounts()
-                .stream()
-                .filter(userAccount ->
-                    connectionsIds
-                            .stream()
-                            .anyMatch(a -> Objects.equals(userAccount.getId(), a.getRecipient().getId())))
-                .collect(Collectors.toList());
-        model.addAttribute("transaction", new Transaction());
-        if(connectionObjects.isEmpty()){
-            connectionObjects = new ArrayList<>();
+        UserAccount currentUser = userAccountService.findCurrentUser();
+        if (currentUser == null) {
+            // Redirect to the login page
+            return "redirect:/login";
         }
-        model.addAttribute("connections", connectionObjects);
+        logger.info("getting all transactions and connections associated to user");
+        Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page -1, size));
+        List<UserAccount> connections = senderRecipientConnectionService.getSenderRecipientConnectionBySender(currentUser, userAccountService.findAllUserAccounts());
+
+        model.addAttribute("transaction", new Transaction());
+        model.addAttribute("connections", connections);
         model.addAttribute("transactions", transactions.getContent());
         model.addAttribute("pages", new int[transactions.getTotalPages()]);
         model.addAttribute("totalPages", transactions.getTotalPages());
@@ -83,41 +60,25 @@ public class TransfersController {
 
     @PostMapping(path="/transfers")
     public String postTransaction(Model model,
-                               @Valid Transaction transaction, BindingResult result,
-                               @RequestParam(name="page", defaultValue = "0") Integer page,
+                               @Valid Transaction transaction, BindingResult result, RedirectAttributes redirectAttributes,
+                               @RequestParam(name="page", defaultValue = "1") Integer page,
                                @RequestParam(name="size", defaultValue = "10") Integer size){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserAccount currentUser = userAccountService.findUserAccountByEmail(authentication.getName());
-
-        Transaction newTransaction = new Transaction();
-        newTransaction.setSender(currentUser);
-        newTransaction.setRecipient(transaction.getRecipient());
-        newTransaction.setAmount(transaction.getAmount());
-        newTransaction.setDate(new Date());
-        newTransaction.setDescription(transaction.getDescription());
-        transactionService.saveTransaction(newTransaction);
-
-        userAccountService.decreaseUserAccountBalance(currentUser, transaction.getAmount());
-
-        Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page, size));
-        List<RecipientList> connectionsIds = recipientListService.getRecipientListBySender(currentUser);
-        List<UserAccount> connectionObjects = userAccountService.findAllUserAccounts()
-                .stream()
-                .filter(userAccount ->
-                        connectionsIds
-                                .stream()
-                                .anyMatch(a -> Objects.equals(userAccount.getId(), a.getRecipient().getId())))
-                .collect(Collectors.toList());
-        if(connectionObjects.isEmpty()){
-            connectionObjects = new ArrayList<>();
+        UserAccount currentUser = userAccountService.findCurrentUser();
+        if(result.hasErrors()){
+            logger.error("could not add Transaction for user");
         }
-        if (result.hasErrors()) {
-            result.rejectValue("transaction", null,
-                    "Amount should be greater than or equal to 0.01");
-            result.rejectValue("recipient", null,
-                    "A recipient needs to be selected");
+        else{
+            Transaction newTransaction = transactionService.createTransaction(currentUser, transaction.getRecipient(), transaction.getAmount(), transaction.getDescription());
+            transactionService.saveTransaction(newTransaction);
+
+            userAccountService.decreaseUserAccountBalance(currentUser, transaction.getAmount());
+            logger.info("saving transaction and updating user's balance");
         }
-        model.addAttribute("connections", connectionObjects);
+
+        Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page -1, size));
+        List<UserAccount> connections = senderRecipientConnectionService.getSenderRecipientConnectionBySender(currentUser, userAccountService.findAllUserAccounts());
+
+        model.addAttribute("connections", connections);
         model.addAttribute("transactions", transactions.getContent());
         model.addAttribute("pages", new int[transactions.getTotalPages()]);
         model.addAttribute("totalPages", transactions.getTotalPages());
@@ -127,24 +88,27 @@ public class TransfersController {
 
     @PostMapping(path="/addconnection")
     public String addNewConnection(
-            Model model,
-            String recipientList
+            String email,
+            RedirectAttributes redirectAttributes
     ){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserAccount currentUser = userAccountService.findUserAccountByEmail(authentication.getName());
-        RecipientList newRecipientList = new RecipientList();
-        newRecipientList.setSender(currentUser);
-        UserAccount foundRecipient = userAccountService.findUserAccountByEmail(recipientList);
-        if(Objects.isNull(foundRecipient)){
-            model.addAttribute("connectionResult", "error");
+        UserAccount currentUser = userAccountService.findCurrentUser();
+        UserAccount recipientUserAccount = userAccountService.findUserAccountByEmail(email);
+        if(recipientUserAccount != null){
+            SenderRecipientConnection newSenderRecipientConnection = senderRecipientConnectionService.createSenderRecipientConnection(currentUser, userAccountService.findUserAccountByEmail(email));
+
+            if(senderRecipientConnectionService.checkIfsenderRecipientConnectionRepositoryExists(newSenderRecipientConnection)){
+                redirectAttributes.addFlashAttribute("info", "This email is already in a recipient");
+            }
+            else{
+                logger.info("added new connection for current user");
+                senderRecipientConnectionService.saveSenderRecipientConnectionRepository(newSenderRecipientConnection);
+                redirectAttributes.addFlashAttribute("success", "This recipient was added successfully");
+            }
         }
         else{
-            model.addAttribute("connectionResult", "success");
-            newRecipientList.setRecipient(foundRecipient);
-            recipientListService.saveRecipientList(newRecipientList);
+            logger.error("could not add new connection");
+            redirectAttributes.addFlashAttribute("error", "No user known with this email address");
         }
-
-
         return "redirect:/transfers";
     }
 

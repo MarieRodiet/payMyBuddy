@@ -2,7 +2,7 @@ DROP DATABASE `paymybuddy`;
 CREATE DATABASE `paymybuddy`;
 USE `paymybuddy`;
 
-CREATE TABLE `User_Account` (
+CREATE TABLE `user_accounts` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -14,16 +14,16 @@ CREATE TABLE `User_Account` (
    PRIMARY KEY (`ID`)
    );
 
-CREATE TABLE `Recipient_List` (
+CREATE TABLE `sender_recipient_connection` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `id_sender` int NOT NULL,
   `id_recipient` int NOT NULL,
    PRIMARY KEY (`ID`),
-   CONSTRAINT `fk_recipientList_sender` FOREIGN KEY (`id_sender`) REFERENCES `User_Account` (`ID`),
-   CONSTRAINT `fk_recipientList_recipient` FOREIGN KEY (`id_recipient`) REFERENCES `User_Account` (`ID`)
+   CONSTRAINT `fk_connection_sender` FOREIGN KEY (`id_sender`) REFERENCES `user_accounts` (`ID`),
+   CONSTRAINT `fk_connection_recipient` FOREIGN KEY (`id_recipient`) REFERENCES `user_accounts` (`ID`)
    );
 
-CREATE TABLE `Transaction` (
+CREATE TABLE `transactions` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `id_sender` int NOT NULL,
   `id_recipient` int NOT NULL,
@@ -31,29 +31,29 @@ CREATE TABLE `Transaction` (
   `date` datetime NOT NULL,
   `description` varchar(50) NOT NULL,
    PRIMARY KEY (`ID`),
-   CONSTRAINT `fk_transaction_sender` FOREIGN KEY (`id_sender`) REFERENCES `User_Account` (`ID`),
-   CONSTRAINT `fk_transaction_recipient` FOREIGN KEY (`id_recipient`) REFERENCES `User_Account` (`ID`)
+   CONSTRAINT `fk_transaction_sender` FOREIGN KEY (`id_sender`) REFERENCES `user_accounts` (`ID`),
+   CONSTRAINT `fk_transaction_recipient` FOREIGN KEY (`id_recipient`) REFERENCES `user_accounts` (`ID`)
    );
 
 
 -- Inserting data into User_Account table
-INSERT INTO `User_Account` (`email`, `password`, `lastname`, `firstname`, `account_nb`, `balance`, `role`)
+INSERT INTO `user_accounts` (`email`, `password`, `lastname`, `firstname`, `account_nb`, `balance`, `role`)
 VALUES
   ('user_Account1@example.com', 'password1', 'Doe', 'John', '1234567890', 100.00, 'USER'),
-  ('user_Account2@example.com', 'password2', 'Smith', 'Jane', '0987654321', 50.00, 'USER'),
-  ('user_Account3@example.com', 'password3', 'Johnson', 'Michael', '5678901234', 200.00, 'USER');
+  ('user_Account2@example.com', 'password2', 'Smith', 'Jane', '0987654321', 50.00, 'USER');
 
--- Inserting data into Recipient_List table
-INSERT INTO `Recipient_List` (`id_sender`, `id_recipient`)
+-- Inserting data into Recipient_List table recipient_lists
+INSERT INTO `sender_recipient_connection` (`id_sender`, `id_recipient`)
 VALUES
-  (1, 2),
-  (1, 2),
-  (3, 1);
+  (2, 1),
+  (1, 2);
 
 -- Inserting data into Transaction table
-INSERT INTO `Transaction` (`id_sender`, `id_recipient`, `amount`, `date`, `description`)
+INSERT INTO paymybuddy.transactions(`id_sender`, `id_recipient`, `amount`, `date`, `description`)
 VALUES
   (1, 2, 20.00, NOW(), 'Payment for dinner'),
-  (2, 3, 10.00, NOW(), 'Repayment for loan');
+  (1, 2, 10.00, NOW(), 'Bus tour'),
+  (2, 1, 20.00, NOW(), 'Museum'),
+  (2, 1, 10.00, NOW(), 'Repayment for loan');
 
   COMMIT;
