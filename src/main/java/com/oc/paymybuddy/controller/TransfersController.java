@@ -68,11 +68,17 @@ public class TransfersController {
             logger.error("could not add Transaction for user");
         }
         else{
-            Transaction newTransaction = transactionService.createTransaction(currentUser, transaction.getRecipient(), transaction.getAmount(), transaction.getDescription());
-            transactionService.saveTransaction(newTransaction);
+            if(currentUser.getBalance().compareTo(transaction.getAmount()) > 0){
+                Transaction newTransaction = transactionService.createTransaction(currentUser, transaction.getRecipient(), transaction.getAmount(), transaction.getDescription());
+                transactionService.saveTransaction(newTransaction);
 
-            userAccountService.decreaseUserAccountBalance(currentUser, transaction.getAmount());
-            logger.info("saving transaction and updating user's balance");
+                userAccountService.decreaseUserAccountBalance(currentUser, transaction.getAmount());
+                logger.info("saving transaction and updating user's balance");
+            }
+            else {
+                logger.error("Insufficient balance to perform the transaction");
+            }
+
         }
 
         Page<Transaction> transactions  = transactionService.getTransactionsBySender(currentUser, PageRequest.of(page -1, size));

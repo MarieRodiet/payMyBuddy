@@ -77,12 +77,15 @@ public class ProfileController {
             RedirectAttributes redirectAttributes,
             @ModelAttribute("userAccount") UserAccount updatedUserAccount,
             BindingResult result) {
+        UserAccount currentUser = userAccountService.findCurrentUser();
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("error", "Your profile could not be updated");
-            return "editProfile"; // Return to the edit profile page with errors
+            model.addAttribute("currentUser", currentUser);
+            return "redirect:/editProfile"; // Return to the edit profile page with errors
         }
-        model.addAttribute("currentUser", userAccountService.findCurrentUser());
-        userAccountService.saveUserAccount(updatedUserAccount);
+        UserAccount updated = userAccountService.saveUserAccount(updatedUserAccount);
+        model.addAttribute("currentUser", updated);
+
         return "redirect:/profile";
     }
 }

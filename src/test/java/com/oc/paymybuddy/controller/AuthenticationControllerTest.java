@@ -81,6 +81,7 @@ public class AuthenticationControllerTest {
                 .andExpect(model().attributeExists("user"));
 
     }
+
     @Test
     public void tryingAccessingLoginPageShouldWork() throws Exception {
         mockMvc.perform(get("/login"))

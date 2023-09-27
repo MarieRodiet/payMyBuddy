@@ -82,6 +82,39 @@ public class ProfileControllerTest {
 
     @WithMockUser(authorities = "USER")
     @Test
+    public void editingProfileShouldUpdateUser() throws Exception {
+        when(userAccountService.findCurrentUser()).thenReturn(mockUser);
+        when(userAccountService.saveUserAccount(mockUser)).thenReturn(mockUser);
+
+        mockMvc.perform(post("/editProfile")
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection()) // Expect a redirection status code
+                .andExpect(redirectedUrl("/profile"));
+    }
+
+    @Test
+    @WithMockUser(authorities = "USER")
+    public void editingProfileWithErrorsShouldReturnToEditProfilePage() throws Exception {
+        when(userAccountService.findCurrentUser()).thenReturn(mockUser);
+        UserAccount invalidUserAccount =  new UserAccount();
+        invalidUserAccount .setEmail("");
+        invalidUserAccount .setPassword("");
+        invalidUserAccount .setFirstname("");
+        invalidUserAccount .setLastname("");
+        invalidUserAccount .setBalance(BigDecimal.ONE);
+        invalidUserAccount .setAccountNumber("0011AB");
+
+        mockMvc.perform(post("/editProfile")
+                        .flashAttr("userAccount", invalidUserAccount) // Use flashAttr to bind the model attribute
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/profile")) // Expect to stay on the editProfile page
+                .andExpect(flash().attributeExists("error")); // Expect the "error" flash attribute to be present
+
+    }
+
+    @WithMockUser(authorities = "USER")
+    @Test
     public void addingValidAmountShouldUpdateBalance() throws Exception {
         when(userAccountService.findCurrentUser()).thenReturn(mockUser);
         when(userAccountService.updateUserAccountBalance(mockUser, 100)).thenReturn(mockUser);
