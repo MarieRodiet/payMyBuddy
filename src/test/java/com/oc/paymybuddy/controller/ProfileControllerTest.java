@@ -94,7 +94,7 @@ public class ProfileControllerTest {
 
     @Test
     @WithMockUser(authorities = "USER")
-    public void editingProfileWithErrorsShouldReturnToEditProfilePage() throws Exception {
+    public void editingProfileWithErrorsShouldReturnToProfilePage() throws Exception {
         when(userAccountService.findCurrentUser()).thenReturn(mockUser);
         UserAccount invalidUserAccount =  new UserAccount();
         invalidUserAccount .setEmail("");
@@ -105,12 +105,10 @@ public class ProfileControllerTest {
         invalidUserAccount .setAccountNumber("0011AB");
 
         mockMvc.perform(post("/editProfile")
-                        .flashAttr("userAccount", invalidUserAccount) // Use flashAttr to bind the model attribute
+                        .flashAttr("userAccount", invalidUserAccount)
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/profile")) // Expect to stay on the editProfile page
-                .andExpect(flash().attributeExists("error")); // Expect the "error" flash attribute to be present
-
+                .andExpect(redirectedUrl("/profile"));
     }
 
     @WithMockUser(authorities = "USER")

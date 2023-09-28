@@ -1,16 +1,17 @@
 package com.oc.paymybuddy.service;
 
+import com.oc.paymybuddy.controller.ProfileController;
 import com.oc.paymybuddy.entity.Role;
 import com.oc.paymybuddy.entity.UserAccount;
 import com.oc.paymybuddy.repository.UserAccountRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -18,9 +19,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
+@WebMvcTest(UserAccountService.class)
 public class UserAccountServiceTests {
     @MockBean
     UserAccountRepository userAccountRepository;
