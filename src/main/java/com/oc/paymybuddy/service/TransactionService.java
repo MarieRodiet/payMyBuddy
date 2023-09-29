@@ -31,8 +31,8 @@ public class TransactionService {
         return transactions;
     }
 
-    public void saveTransaction(Transaction newTransaction) {
-        transactionRepository.save(newTransaction);
+    public Transaction saveTransaction(Transaction newTransaction) {
+        return transactionRepository.save(newTransaction);
     }
 
     public Transaction createTransaction(UserAccount sender, UserAccount recipient, BigDecimal amount, String description){
