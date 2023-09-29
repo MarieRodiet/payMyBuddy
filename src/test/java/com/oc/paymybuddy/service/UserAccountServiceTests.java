@@ -1,14 +1,13 @@
 package com.oc.paymybuddy.service;
 
-import com.oc.paymybuddy.controller.ProfileController;
 import com.oc.paymybuddy.entity.Role;
 import com.oc.paymybuddy.entity.UserAccount;
 import com.oc.paymybuddy.repository.UserAccountRepository;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -19,33 +18,39 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 
-@WebMvcTest(UserAccountService.class)
+@SpringBootTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class UserAccountServiceTests {
     @MockBean
     UserAccountRepository userAccountRepository;
 
     @Autowired
     private UserAccountService userAccountService;
-
-    private UserAccount firstUserAccount  = new UserAccount(
-            1,
-            "marie@gmail.com",
-            "password",
-            "marieLASTNAME",
-            "marieFIRSTNAME",
-            "ÀÀÀAAAA",
-            new BigDecimal(100),
-            Role.USER.name());
-    private UserAccount secondUserAccount  = new UserAccount(
-            2,
-            "bob@gmail.com",
-            "password",
-            "marieLASTNAME",
-            "marieFIRSTNAME",
-            "ÀÀÀAAAA",
-            BigDecimal.ONE,
-            Role.USER.name());
-    private List<UserAccount> userAccountList  = Arrays.asList(firstUserAccount, secondUserAccount);
+    private static UserAccount firstUserAccount;
+    private static UserAccount secondUserAccount;
+    private static List<UserAccount> userAccountList;
+    @BeforeAll
+    public static void setUpBeforeClass() {
+        firstUserAccount  = new UserAccount(
+                1,
+                "marie@gmail.com",
+                "password",
+                "marieLASTNAME",
+                "marieFIRSTNAME",
+                "ÀÀÀAAAA",
+                new BigDecimal(100),
+                Role.USER.name());
+        secondUserAccount  = new UserAccount(
+                2,
+                "bob@gmail.com",
+                "password",
+                "marieLASTNAME",
+                "marieFIRSTNAME",
+                "ÀÀÀAAAA",
+                BigDecimal.ONE,
+                Role.USER.name());
+        userAccountList  = Arrays.asList(firstUserAccount, secondUserAccount);
+    }
 
     @WithMockUser(authorities = "USER")
     @Test
@@ -100,6 +105,7 @@ public class UserAccountServiceTests {
     @WithMockUser(authorities = "USER")
     @Test
     public void decreaseUserAccountBalanceShouldReturnCorrectAmount(){
+        firstUserAccount.setBalance(new BigDecimal(100));
         when(this.userAccountRepository.save(firstUserAccount)).thenReturn(firstUserAccount);
         UserAccount user = this.userAccountService.decreaseUserAccountBalance(firstUserAccount, new BigDecimal(10));
         BigDecimal expectedBalance = new BigDecimal(89.95);
