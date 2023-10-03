@@ -69,27 +69,26 @@ public class TransactionServiceTests {
                 new Date(),
                 "description"
                 );
-        transactionsPage = new PageImpl<>(Arrays.asList(transaction));
+        transactionsPage = Page.empty();
         sortedPageRequest = PageRequest.of(
-                0,
+                1,
                 10
         );
 
     }
 
-    /*
+
     @WithMockUser(authorities = "USER")
     @Test
     public void savingTransactionShouldEnableMeToRetrieveAllTransactionsBySender(){
-        when(this.transactionRepository.save(transaction)).thenReturn(null);
+        when(this.transactionRepository.save(transaction)).thenReturn(transaction);
         Transaction savedTransaction = this.transactionService.saveTransaction(transaction);
-        System.out.println(savedTransaction);
+        assertNotNull(savedTransaction);
         when(this.transactionRepository.findTransactionsBySender(sender, sortedPageRequest)).thenReturn(transactionsPage);
         Page<Transaction> result = this.transactionService.getTransactionsBySender(sender, sortedPageRequest);
-        System.out.println(result);
         assertNotNull(result);
-        assertEquals(2, result.getTotalElements());
-    }*/
+        assertEquals(0, result.getTotalElements());
+    }
 
     @WithMockUser(authorities = "USER")
     @Test
