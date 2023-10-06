@@ -3,6 +3,7 @@ package com.oc.paymybuddy.service;
 import com.oc.paymybuddy.entity.SenderRecipientConnection;
 import com.oc.paymybuddy.entity.UserAccount;
 import com.oc.paymybuddy.repository.SenderRecipientConnectionRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +11,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * The SenderRecipientConnectionService is responsible for managing connections between different userAccounts.
+ * This service class provides methods for getting, saving, creating and checking the existence of
+ * SenderRecipientConnection Objects.
+ */
 @Service
 @AllArgsConstructor
+@Transactional
 public class SenderRecipientConnectionService {
 
     private SenderRecipientConnectionRepository senderRecipientConnectionRepository;
@@ -25,10 +32,10 @@ public class SenderRecipientConnectionService {
                                 .stream()
                                 .anyMatch(a -> Objects.equals(userAccount.getId(), a.getRecipient().getId())))
                 .collect(Collectors.toList());
-        return  connectionObjects;
+        return connectionObjects;
     }
 
-    public SenderRecipientConnection saveSenderRecipientConnectionRepository(SenderRecipientConnection senderRecipientConnection){
+    public SenderRecipientConnection saveSenderRecipientConnection(SenderRecipientConnection senderRecipientConnection){
         if(!checkIfsenderRecipientConnectionRepositoryExists(senderRecipientConnection)){
             return senderRecipientConnectionRepository.save(senderRecipientConnection);
         }

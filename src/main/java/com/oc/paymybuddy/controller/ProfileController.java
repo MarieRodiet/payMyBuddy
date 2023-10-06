@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+/**
+ * The ProfileController class is responsible for handling HTTP requests related to a user's profile and account.
+ * It provides methods for displaying showing the profile page, editing the information of the profile and adding
+ * money to the account.
+ */
 @Controller
 public class ProfileController {
 

@@ -4,7 +4,6 @@ import com.oc.paymybuddy.entity.Role;
 import com.oc.paymybuddy.entity.Transaction;
 import com.oc.paymybuddy.entity.UserAccount;
 import com.oc.paymybuddy.repository.TransactionRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

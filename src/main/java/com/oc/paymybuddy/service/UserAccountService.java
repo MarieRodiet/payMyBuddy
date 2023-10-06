@@ -2,6 +2,8 @@ package com.oc.paymybuddy.service;
 
 import com.oc.paymybuddy.entity.UserAccount;
 import com.oc.paymybuddy.repository.UserAccountRepository;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,10 +13,16 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The UserAccountService is responsible for managing user accounts .
+ * This service class provides methods for getting all users, a user and the current user as well as saving an
+ * user account and updating its balance.
+ */
 @Service
+@AllArgsConstructor
+@Transactional
 public class UserAccountService{
 
-    @Autowired
     private UserAccountRepository userAccountRepository;
 
     public UserAccount findUserAccountByEmail(String email) {
@@ -33,7 +41,6 @@ public class UserAccountService{
         }
         return null;
     }
-
 
     public List<UserAccount> findAllUserAccounts() {
         List<UserAccount> userAccounts = userAccountRepository.findAll();

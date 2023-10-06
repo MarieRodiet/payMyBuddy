@@ -16,6 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+/**
+ * The AuthenticationController class is responsible for handling HTTP requests related to registration and login.
+ */
 @Controller
 public class AuthenticationController {
     private static final Logger logger = getLogger(AuthenticationController.class);

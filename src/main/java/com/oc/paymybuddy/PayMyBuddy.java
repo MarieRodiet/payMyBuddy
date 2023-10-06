@@ -2,11 +2,13 @@ package com.oc.paymybuddy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-public class Application {
+@EnableTransactionManagement
+public class PayMyBuddy {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(PayMyBuddy.class, args);
 	}
 }
