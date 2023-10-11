@@ -41,6 +41,14 @@ public class TransfersController {
     private SenderRecipientConnectionService senderRecipientConnectionService;
 
 
+    /**
+     * Handles GET requests to the "/transfers" endpoint, displaying a list of user transactions and connections.
+     *
+     * @param model        The Spring MVC model used for storing data to be rendered in the view.
+     * @param page         The page number for pagination (default is 1).
+     * @param size         The number of items per page (default is 10).
+     * @return The view name "transfers" or redirects to the login page if the user is not authenticated.
+     */
     @GetMapping(path="/transfers")
     public String getTransfers(Model model,
                                @RequestParam(name="page", defaultValue = "1") Integer page,
@@ -63,6 +71,17 @@ public class TransfersController {
         return "transfers";
     }
 
+    /**
+     * Handles POST requests to the "/transfers" endpoint, allowing users to create new transactions.
+     *
+     * @param model               The Spring MVC model used for storing data to be rendered in the view.
+     * @param transaction         The transaction data to be created and saved.
+     * @param result              The binding result for validation errors.
+     * @param redirectAttributes  Used for adding flash attributes to the redirect.
+     * @param page                The page number for pagination (default is 1).
+     * @param size                The number of items per page (default is 10).
+     * @return The view name "transfers" with updated data or an error message if validation fails.
+     */
     @PostMapping(path="/transfers")
     public String postTransaction(Model model,
                                @Valid Transaction transaction, BindingResult result, RedirectAttributes redirectAttributes,
@@ -100,6 +119,13 @@ public class TransfersController {
         return "redirect:/transfers";
     }
 
+    /**
+     * Handles POST requests to the "/addconnection" endpoint, allowing users to add new connections.
+     *
+     * @param email               The email of the user to be connected.
+     * @param redirectAttributes  Used for adding flash attributes to the redirect.
+     * @return Redirects to the "/transfers" page with success or error messages.
+     */
     @PostMapping(path="/addconnection")
     public String addNewConnection(
             String email,
@@ -111,12 +137,12 @@ public class TransfersController {
             SenderRecipientConnection newSenderRecipientConnection = senderRecipientConnectionService.createSenderRecipientConnection(currentUser, userAccountService.findUserAccountByEmail(email));
 
             if(senderRecipientConnectionService.checkIfsenderRecipientConnectionRepositoryExists(newSenderRecipientConnection)){
-                redirectAttributes.addFlashAttribute("info", "This email is already in a recipient");
+                redirectAttributes.addFlashAttribute("info", "Connection already exists");
             }
             else{
                 logger.info("added new connection for current user");
                 senderRecipientConnectionService.saveSenderRecipientConnection(newSenderRecipientConnection);
-                redirectAttributes.addFlashAttribute("success", "This recipient was added successfully");
+                redirectAttributes.addFlashAttribute("success", "Connection successfully created");
             }
         }
         else{
