@@ -33,6 +33,9 @@ public class TransactionService {
         );
 
         Page<Transaction> transactions = transactionRepository.findTransactionsBySender(userAccount, sortedPageRequest);
+        if(transactions == null){
+            return Page.empty();
+        }
         return transactions;
     }
 
