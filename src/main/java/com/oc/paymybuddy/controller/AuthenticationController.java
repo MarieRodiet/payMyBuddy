@@ -28,6 +28,12 @@ public class AuthenticationController {
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
+    /**
+     * Handles GET requests to the "/register" endpoint, displaying a register form.
+     *
+     * @param model        The Spring MVC model used for storing data to be rendered in the view.
+     * @return The view name "register".
+     */
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
         UserAccount user = new UserAccount();
@@ -36,6 +42,14 @@ public class AuthenticationController {
         return "register";
     }
 
+    /**
+     * Handles POST requests to the "/register" endpoint, allowing users to create their userAccount in the app.
+     *
+     * @param result              The binding result for validation errors.
+     * @param redirectAttributes  Used for adding flash attributes to the redirect.
+     * @param model               The Spring MVC model used for storing data to be rendered in the view.
+     * @return Redirects to"transfers" after successfully registering or back to register with an error message if registration fails.
+     */
     @PostMapping("/register")
     public String registration(@Valid @ModelAttribute("user") UserAccount user,
                                BindingResult result,
@@ -61,6 +75,11 @@ public class AuthenticationController {
     }
 
 
+    /**
+     * Handles GET requests to the "/login" endpoint, allowing users to login.
+     *
+     * @return the view name "/login".
+     */
     @GetMapping("/login")
     public String login(){
         logger.info("login page");
