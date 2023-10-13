@@ -1,4 +1,3 @@
-DROP DATABASE `paymybuddy`;
 CREATE DATABASE `paymybuddy`;
 USE `paymybuddy`;
 

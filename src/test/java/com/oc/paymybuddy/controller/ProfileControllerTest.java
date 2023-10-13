@@ -82,6 +82,37 @@ public class ProfileControllerTest {
 
     @WithMockUser(authorities = "USER")
     @Test
+    public void editingProfileShouldUpdateUser() throws Exception {
+        when(userAccountService.findCurrentUser()).thenReturn(mockUser);
+        when(userAccountService.saveUserAccount(mockUser)).thenReturn(mockUser);
+
+        mockMvc.perform(post("/editProfile")
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection()) // Expect a redirection status code
+                .andExpect(redirectedUrl("/profile"));
+    }
+
+    @Test
+    @WithMockUser(authorities = "USER")
+    public void editingProfileWithErrorsShouldReturnToProfilePage() throws Exception {
+        when(userAccountService.findCurrentUser()).thenReturn(mockUser);
+        UserAccount invalidUserAccount =  new UserAccount();
+        invalidUserAccount .setEmail("");
+        invalidUserAccount .setPassword("");
+        invalidUserAccount .setFirstname("");
+        invalidUserAccount .setLastname("");
+        invalidUserAccount .setBalance(BigDecimal.ONE);
+        invalidUserAccount .setAccountNumber("0011AB");
+
+        mockMvc.perform(post("/editProfile")
+                        .flashAttr("userAccount", invalidUserAccount)
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/profile"));
+    }
+
+    @WithMockUser(authorities = "USER")
+    @Test
     public void addingValidAmountShouldUpdateBalance() throws Exception {
         when(userAccountService.findCurrentUser()).thenReturn(mockUser);
         when(userAccountService.updateUserAccountBalance(mockUser, 100)).thenReturn(mockUser);

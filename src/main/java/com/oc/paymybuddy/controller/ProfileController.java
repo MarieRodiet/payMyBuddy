@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+/**
+ * The ProfileController class is responsible for handling HTTP requests related to a user's profile and account.
+ * It provides methods for displaying showing the profile page, editing the information of the profile and adding
+ * money to the account.
+ */
 @Controller
 public class ProfileController {
 
@@ -20,6 +25,12 @@ public class ProfileController {
     @Autowired
     private UserAccountService userAccountService;
 
+    /**
+     * Handles GET requests to the "/profile" endpoint, allowing users to view their user account profile.
+     *
+     * @param model  The Spring MVC model used for storing data to be rendered in the view.
+     * @return the view name "/profile" or Redirects to "register" after failing authentication.
+     */
     @GetMapping("/profile")
     public String showUserProfile(Model model) {
         UserAccount currentUser = userAccountService.findCurrentUser();
@@ -34,6 +45,13 @@ public class ProfileController {
         }
     }
 
+    /**
+     * Handles POST requests to the "/addmoney" endpoint, allowing users to add money to their balance.
+     *
+     * @param money    The amount in Integer they wish to add
+     * @param model    The Spring MVC model used for storing data to be rendered in the view.
+     * @return Redirects to "profile" or Redirects to "register" after failing authentication.
+     */
     @PostMapping("/addmoney")
     public String addMoneyToAccount(
             Model model,
@@ -57,6 +75,12 @@ public class ProfileController {
         }
     }
 
+    /**
+     * Handles GET requests to the "/editProfile" endpoint, allowing users to edit their user account profile.
+     *
+     * @param model  The Spring MVC model used for storing data to be rendered in the view.
+     * @return the view name "/editProfile" or Redirects to "register" after failing authentication.
+     */
     @GetMapping("/editProfile")
     public String getEditProfilePage(Model model) {
         UserAccount currentUser = userAccountService.findCurrentUser();
@@ -71,18 +95,30 @@ public class ProfileController {
         }
     }
 
+    /**
+     * Handles POST requests to the "/editProfile" endpoint, allowing users to submit the changes to their profile
+     *
+     * @param result              The binding result for validation errors.
+     * @param redirectAttributes  Used for adding flash attributes to the redirect.
+     * @param  updatedUserAccount  UserAccount Object with modified properties
+     * @param model               The Spring MVC model used for storing data to be rendered in the view.
+     * @return Redirects to "profile" after successfully saving changes or back to "editProfile" with an error message if the form has errors.
+     */
     @PostMapping("/editProfile")
     public String editProfile(
             Model model,
             RedirectAttributes redirectAttributes,
             @ModelAttribute("userAccount") UserAccount updatedUserAccount,
             BindingResult result) {
+        UserAccount currentUser = userAccountService.findCurrentUser();
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("error", "Your profile could not be updated");
-            return "editProfile"; // Return to the edit profile page with errors
+            model.addAttribute("currentUser", currentUser);
+            return "redirect:/editProfile"; // Return to the edit profile page with errors
         }
-        model.addAttribute("currentUser", userAccountService.findCurrentUser());
-        userAccountService.saveUserAccount(updatedUserAccount);
+        UserAccount updated = userAccountService.saveUserAccount(updatedUserAccount);
+        model.addAttribute("currentUser", updated);
+
         return "redirect:/profile";
     }
 }

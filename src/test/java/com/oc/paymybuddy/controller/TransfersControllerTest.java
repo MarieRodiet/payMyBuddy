@@ -93,9 +93,8 @@ public class TransfersControllerTest {
                         .param("amount", "100")
                         .param("description", "Test transaction")
                         .with(csrf())) // Include CSRF token
-                .andExpect(status().isOk())
-                .andExpect(view().name("transfers"))
-                .andExpect(model().attributeExists("connections", "transactions", "pages", "totalPages", "currentPage"));
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/transfers"));
 
     }
 
