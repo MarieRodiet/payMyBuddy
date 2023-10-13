@@ -13,6 +13,14 @@ For building and running the application you need:
 git clone https://github.com/MarieRodiet/payMyBuddy.git
 ```
 
+### Create and Run paymybuddy database
+1. run the commands localed in file src/main/resources/static/sql_commands.txt
+2. check if server is running by running this command
+```
+   select * from user_accounts;
+```
+
+
 ### Start the App
 ```
 $ mvn spring-boot:run
