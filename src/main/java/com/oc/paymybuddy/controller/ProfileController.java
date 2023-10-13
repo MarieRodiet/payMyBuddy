@@ -25,6 +25,12 @@ public class ProfileController {
     @Autowired
     private UserAccountService userAccountService;
 
+    /**
+     * Handles GET requests to the "/profile" endpoint, allowing users to view their user account profile.
+     *
+     * @param model  The Spring MVC model used for storing data to be rendered in the view.
+     * @return the view name "/profile" or Redirects to "register" after failing authentication.
+     */
     @GetMapping("/profile")
     public String showUserProfile(Model model) {
         UserAccount currentUser = userAccountService.findCurrentUser();
@@ -39,6 +45,13 @@ public class ProfileController {
         }
     }
 
+    /**
+     * Handles POST requests to the "/addmoney" endpoint, allowing users to add money to their balance.
+     *
+     * @param money    The amount in Integer they wish to add
+     * @param model    The Spring MVC model used for storing data to be rendered in the view.
+     * @return Redirects to "profile" or Redirects to "register" after failing authentication.
+     */
     @PostMapping("/addmoney")
     public String addMoneyToAccount(
             Model model,
@@ -62,6 +75,12 @@ public class ProfileController {
         }
     }
 
+    /**
+     * Handles GET requests to the "/editProfile" endpoint, allowing users to edit their user account profile.
+     *
+     * @param model  The Spring MVC model used for storing data to be rendered in the view.
+     * @return the view name "/editProfile" or Redirects to "register" after failing authentication.
+     */
     @GetMapping("/editProfile")
     public String getEditProfilePage(Model model) {
         UserAccount currentUser = userAccountService.findCurrentUser();
@@ -76,6 +95,15 @@ public class ProfileController {
         }
     }
 
+    /**
+     * Handles POST requests to the "/editProfile" endpoint, allowing users to submit the changes to their profile
+     *
+     * @param result              The binding result for validation errors.
+     * @param redirectAttributes  Used for adding flash attributes to the redirect.
+     * @param  updatedUserAccount  UserAccount Object with modified properties
+     * @param model               The Spring MVC model used for storing data to be rendered in the view.
+     * @return Redirects to "profile" after successfully saving changes or back to "editProfile" with an error message if the form has errors.
+     */
     @PostMapping("/editProfile")
     public String editProfile(
             Model model,
